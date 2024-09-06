@@ -2,7 +2,9 @@ package com.backoffice.core.associate.v1.usecase.dataProvider;
 
 import com.backoffice.core.associate.adapter.AssociateDataProvider;
 import com.backoffice.core.associate.model.Associate;
+import com.backoffice.core.associate.vo.AssociateFilterVO;
 
+import java.util.List;
 import java.util.Optional;
 
 public class NotFoundAssociateDataProviderTest implements AssociateDataProvider {
@@ -18,8 +20,13 @@ public class NotFoundAssociateDataProviderTest implements AssociateDataProvider 
     }
 
     @Override
-    public Optional<Associate> getById(String id) {
+    public Optional<Associate> findById(String id) {
         return Optional.empty();
+    }
+
+    @Override
+    public List<Associate> findAll(AssociateFilterVO vo) {
+        return List.of();
     }
 
     @Override

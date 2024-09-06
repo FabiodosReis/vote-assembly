@@ -1,7 +1,9 @@
 package com.backoffice.core.associate.adapter;
 
 import com.backoffice.core.associate.model.Associate;
+import com.backoffice.core.associate.vo.AssociateFilterVO;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface AssociateDataProvider {
@@ -10,7 +12,9 @@ public interface AssociateDataProvider {
 
     Optional<Associate> update(Associate associate);
 
-    Optional<Associate> getById(String id);
+    Optional<Associate> findById(String id);
+
+    List<Associate> findAll(AssociateFilterVO vo);
 
     boolean existsCpfInAnotherAssociate(String cpf, String associateId);
 }

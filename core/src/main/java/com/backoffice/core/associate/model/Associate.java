@@ -8,8 +8,8 @@ import lombok.Setter;
 
 import java.util.Objects;
 
-@Getter
-@Setter
+
+@Setter @Getter
 public class Associate {
 
 

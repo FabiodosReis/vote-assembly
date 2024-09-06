@@ -27,6 +27,7 @@
         <module>core</module>
         <module>app</module>
     </modules>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -41,12 +42,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>

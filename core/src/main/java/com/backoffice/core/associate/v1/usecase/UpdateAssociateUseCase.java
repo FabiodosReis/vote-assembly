@@ -25,7 +25,7 @@ public class UpdateAssociateUseCase extends AssociateUseCaseAbstract {
             throw new AssociateException(String.format("Cpf %s already exists", associate.getCpf()));
         }
 
-        dataProvider.getById(associate.getId())
+        dataProvider.findById(associate.getId())
                 .orElseThrow(() -> new AssociateException(String.format("Associate %s not found", associate.getId())));
 
         validate(associate);

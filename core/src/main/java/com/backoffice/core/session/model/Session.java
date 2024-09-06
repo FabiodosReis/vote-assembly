@@ -11,12 +11,9 @@ import java.util.List;
 @Getter @Setter
 public class Session {
 
-    public Session(LocalDateTime endDate, List<Subject> subjectList) {
-        var now =  LocalDateTime.now(ZoneId.of("UTC"));
-        if (endDate == null) endDate = now.plusMinutes(1);
-        this.startDate = now;
+    public Session(List<Subject> subjectList) {
+        this.startDate = LocalDateTime.now(ZoneId.of("UTC"));;
         this.subjectList = subjectList;
-        this.endDate = endDate;
     }
 
     private String id;

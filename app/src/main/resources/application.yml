@@ -15,6 +15,10 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   liquibase:
     change-log: classpath:/db/changelog.xml
+sql:
+  base-path:
+    associate: 'associate'
+
 
 
 

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.backoffice.core.associate.v1.usecase.UpdateAssociateUseCaseTest
--------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.036 s -- in com.backoffice.core.associate.v1.usecase.UpdateAssociateUseCaseTest
