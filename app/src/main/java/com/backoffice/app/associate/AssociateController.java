@@ -1,5 +1,8 @@
 package com.backoffice.app.associate;
 
+import com.backoffice.app.associate.vo.AssociateCreateRequestVO;
+import com.backoffice.app.associate.vo.AssociateResponseVO;
+import com.backoffice.app.associate.vo.AssociateUpdateRequestVO;
 import com.backoffice.app.vo.CustomPage;
 import com.backoffice.app.vo.CustomPageable;
 import com.backoffice.core.associate.vo.AssociateFilterVO;

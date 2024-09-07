@@ -24,12 +24,21 @@ public class UpdateAssociateUseCase extends AssociateUseCaseAbstract {
             throw new AssociateException("Associate id is required");
         }
 
-        dataProvider.findById(associate.getId())
+        var optionalAssociate = dataProvider.findById(associate.getId())
                 .orElseThrow(() -> new AssociateException(String.format("Associate %s not found", associate.getId())));
+
+
+        if (!associate.getCpf().isEmpty()) {
+            optionalAssociate.setCpf(associate.getCpf());
+        }
+
+        if (!associate.getName().isBlank()) {
+            optionalAssociate.setName(associate.getName());
+        }
 
         validate(associate);
         configStatus(associate);
 
-        return dataProvider.update(associate);
+        return dataProvider.update(optionalAssociate);
     }
 }

@@ -18,6 +18,7 @@ spring:
 sql:
   base-path:
     associate: 'associate'
+    session: 'session'
 
 
 

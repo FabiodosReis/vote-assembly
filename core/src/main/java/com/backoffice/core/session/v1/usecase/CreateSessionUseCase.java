@@ -6,6 +6,7 @@ import com.backoffice.core.session.exception.SessionException;
 import lombok.RequiredArgsConstructor;
 
 import javax.inject.Named;
+import java.util.UUID;
 
 @Named
 @RequiredArgsConstructor
@@ -13,10 +14,15 @@ public class CreateSessionUseCase {
 
     private final SessionDataProvider dataProvider;
 
-    public void save(Session session) throws SessionException {
+    public void execute(Session session) throws SessionException {
+        session.setId(UUID.randomUUID().toString());
 
-        if(session.getSubjectList().isEmpty()){
-            throw new SessionException("The Session need 1 or more subjects");
+        if (session.getDescription().isEmpty()) {
+            throw new SessionException("The Session description is required");
+        }
+
+        if (dataProvider.existsByDescription(session.getDescription())) {
+            throw new SessionException("The Session description already Exists");
         }
 
         dataProvider.save(session);

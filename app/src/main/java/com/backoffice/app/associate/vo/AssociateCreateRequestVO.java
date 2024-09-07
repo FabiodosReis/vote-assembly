@@ -1,4 +1,4 @@
-package com.backoffice.app.associate;
+package com.backoffice.app.associate.vo;
 
 import com.backoffice.core.associate.model.Associate;
 import lombok.Getter;
