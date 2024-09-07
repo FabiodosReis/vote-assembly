@@ -14,7 +14,7 @@ public class FindAllAssociateUseCase {
 
     private final AssociateDataProvider dataProvider;
 
-    public List<Associate> findAll(AssociateFilterVO vo){
+    public List<Associate> execute(AssociateFilterVO vo){
         return dataProvider.findAll(vo);
     }
 

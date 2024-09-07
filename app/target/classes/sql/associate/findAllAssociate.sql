@@ -3,6 +3,6 @@ SELECT
     name,
     cpf,
     status
- FROM associate
- WHERE (:cpf = null OR :cpf = cpf)
- LIMIT :page,:size
+FROM associate
+WHERE (:cpf IS NULL OR cpf = :cpf )
+LIMIT :page,:size

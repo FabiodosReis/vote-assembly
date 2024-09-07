@@ -13,7 +13,7 @@ public class FindByIdAssociateUseCase {
 
     private final AssociateDataProvider dataProvider;
 
-    public Optional<Associate> findById(String id){
+    public Optional<Associate> execute(String id){
         return dataProvider.findById(id);
     }
 }

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 public class CreateAssociateUseCaseTest {
 
     private CreateAssociateUseCase createAssociateUseCase;
@@ -30,7 +31,7 @@ public class CreateAssociateUseCaseTest {
                 "055.613.735-36"
         );
 
-        var currentAssociate = createAssociateUseCase.create(associate).get();
+        var currentAssociate = createAssociateUseCase.execute(associate).get();
 
         assertNotNull(currentAssociate.getId());
         assertEquals("Joao da Silva", currentAssociate.getName());
@@ -46,7 +47,7 @@ public class CreateAssociateUseCaseTest {
                 "125.613.735-31"
         );
 
-        var currentAssociate = createAssociateUseCase.create(associate).get();
+        var currentAssociate = createAssociateUseCase.execute(associate).get();
 
         assertNotNull(currentAssociate.getId());
         assertEquals("Joao da Silva", currentAssociate.getName());
@@ -64,7 +65,7 @@ public class CreateAssociateUseCaseTest {
         );
 
         var exception = assertThrows(AssociateException.class, () -> {
-            createAssociateUseCase.create(associate);
+            createAssociateUseCase.execute(associate);
         });
 
         assertEquals("Associate name is required", exception.getMessage());
@@ -79,7 +80,7 @@ public class CreateAssociateUseCaseTest {
         );
 
         var exception = assertThrows(AssociateException.class, () -> {
-            createAssociateUseCase.create(associate);
+            createAssociateUseCase.execute(associate);
         });
 
         assertEquals("Associate cpf is required", exception.getMessage());
@@ -94,7 +95,7 @@ public class CreateAssociateUseCaseTest {
         );
 
         var exception = assertThrows(AssociateException.class, () -> {
-            createAssociateUseCase.create(associate);
+            createAssociateUseCase.execute(associate);
         });
 
         assertEquals("cpf need to formated", exception.getMessage());

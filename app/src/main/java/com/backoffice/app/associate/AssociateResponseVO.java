@@ -11,7 +11,7 @@ public class AssociateResponseVO {
     private String cpf;
     private String status;
 
-    public AssociateResponseVO (Associate associate){
+    public AssociateResponseVO(Associate associate) {
         this.id = associate.getId();
         this.name = associate.getName();
         this.cpf = associate.getCpf();

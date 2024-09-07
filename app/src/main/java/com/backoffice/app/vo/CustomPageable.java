@@ -13,9 +13,9 @@ public class CustomPageable {
     int pageSize;
     long totalElements;
 
-    public CustomPageable(int pageNumber, int pageSize, long totalElements) {
-        this.pageNumber = pageNumber;
-        this.pageSize = pageSize;
+    public CustomPageable(Integer pageNumber, Integer pageSize, long totalElements) {
+        this.pageNumber = pageNumber == null ? 0 : pageNumber;
+        this.pageSize = pageSize == null ? 10 : pageSize;
         this.totalElements = totalElements;
     }
 }

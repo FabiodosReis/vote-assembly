@@ -8,24 +8,23 @@ import com.backoffice.core.associate.vo.AssociateFilterVO;
 import java.util.List;
 import java.util.Optional;
 
-public class CpfAlreadyExistsAssociateDataProviderTest implements AssociateDataProvider {
+public class FindDataProviderTest implements AssociateDataProvider {
 
     @Override
     public Optional<Associate> save(Associate associate) {
-        return Optional.of(associate);
+        return Optional.empty();
     }
 
     @Override
     public Optional<Associate> update(Associate associate) {
-        return Optional.of(associate);
+        return Optional.empty();
     }
 
     @Override
     public Optional<Associate> findById(String id) {
-
         var associate = new Associate(
-                "d324767c-0ec7-43d1-ac7f-9ffc6ba05b80",
-                "Caroline Rocha",
+                "9941c81c-4f47-447e-b19e-11a75c74c9a7",
+                "test",
                 "055.613.735-36"
         );
 
@@ -35,11 +34,18 @@ public class CpfAlreadyExistsAssociateDataProviderTest implements AssociateDataP
 
     @Override
     public List<Associate> findAll(AssociateFilterVO vo) {
-        return List.of();
+        return List.of(
+                new Associate(
+                        "9941c81c-4f47-447e-b19e-11a75c74c9a7",
+                        "test",
+                        "055.613.735-36"
+                )
+        );
+
     }
 
     @Override
     public boolean existsCpfInAnotherAssociate(String cpf, String associateId) {
-        return true;
+        return false;
     }
 }

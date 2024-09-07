@@ -1,0 +1,23 @@
+version: '3.9'
+
+networks:
+  vote-assembly-network:
+    driver: bridge
+
+services:
+  DB:
+    container_name: container_mysql_vote_assembly
+    image: mysql:8.3.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'vote_assembly'
+      MYSQL_ROOT_PASSWORD: '123'
+    ports:
+      - "3306:3306"
+    networks:
+      - vote-assembly-network
+    volumes:
+      - mysqlDb:/var/lib/mysql
+
+volumes:
+  mysqlDb:

@@ -17,7 +17,7 @@ public class UpdateAssociateUseCaseTest {
     private UpdateAssociateUseCase updateAssociateUseCase;
 
     @Test
-    public void shouldUpdateAssociate() {
+    public void shouldExecuteAssociate() {
         setupMock(new UpdateAssociateDataProviderTest());
 
         var associate = new Associate(
@@ -26,7 +26,7 @@ public class UpdateAssociateUseCaseTest {
                 "055.613.735-36"
         );
 
-        var associateUpdated = updateAssociateUseCase.update(associate).get();
+        var associateUpdated = updateAssociateUseCase.execute(associate).get();
 
         assertEquals("d324767c-0ec7-43d1-ac7f-9ffc6ba05b80", associateUpdated.getId());
         assertEquals("Caroline Rocha", associateUpdated.getName());
@@ -35,7 +35,7 @@ public class UpdateAssociateUseCaseTest {
     }
 
     @Test
-    public void shouldNotUpdateAssociateBecauseIdIsNull() {
+    public void shouldNotExecuteAssociateBecauseIdIsNull() {
         setupMock(new UpdateAssociateDataProviderTest());
 
         var associate = new Associate(
@@ -46,14 +46,14 @@ public class UpdateAssociateUseCaseTest {
 
 
         var exception = assertThrows(AssociateException.class, () -> {
-            updateAssociateUseCase.update(associate);
+            updateAssociateUseCase.execute(associate);
         });
 
         assertEquals("Associate id is required", exception.getMessage());
     }
 
     @Test
-    public void shouldNotUpdateAssociateBecauseCpfAlreadyExistsInAnotherAssociate() {
+    public void shouldNotExecuteAssociateBecauseCpfAlreadyExistsInAnotherAssociate() {
         setupMock(new CpfAlreadyExistsAssociateDataProviderTest());
 
         var associate = new Associate(
@@ -64,14 +64,14 @@ public class UpdateAssociateUseCaseTest {
 
 
         var exception = assertThrows(AssociateException.class, () -> {
-            updateAssociateUseCase.update(associate);
+            updateAssociateUseCase.execute(associate);
         });
 
-        assertEquals("Cpf 055.613.735-36 already exists", exception.getMessage());
+        assertEquals("Cpf 055.613.735-36 already exist", exception.getMessage());
     }
 
     @Test
-    public void shouldNotUpdateAssociateBecauseAssociateNotFoundInDatabase() {
+    public void shouldNotExecuteAssociateBecauseAssociateNotFoundInDatabase() {
         setupMock(new NotFoundAssociateDataProviderTest());
 
         var associate = new Associate(
@@ -81,7 +81,7 @@ public class UpdateAssociateUseCaseTest {
         );
 
         var exception = assertThrows(AssociateException.class, () -> {
-            updateAssociateUseCase.update(associate);
+            updateAssociateUseCase.execute(associate);
         });
 
         assertEquals("Associate d324767c-0ec7-43d1-ac7f-9ffc6ba05b80 not found", exception.getMessage());

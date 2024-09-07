@@ -1,5 +1,5 @@
-UPDATE FROM associate SET
+UPDATE associate SET
     name = :name,
-    cpf = :cpf
+    cpf = :cpf,
     status = :status
 WHERE id = :id

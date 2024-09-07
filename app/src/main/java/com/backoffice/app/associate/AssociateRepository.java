@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static com.backoffice.app.utils.FileUtils.getSql;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @Repository
 @RequiredArgsConstructor
@@ -29,12 +30,12 @@ public class AssociateRepository implements AssociateDataProvider {
 
     @Override
     public Optional<Associate> save(Associate associate) {
-        var sql = getSql(basePath.concat("insertAssociate.sql"));
+        var sql = getSql(basePath.concat("/insertAssociate.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("id", associate.getId());
         param.put("name", associate.getName());
         param.put("cpf", associate.getCpf());
-        param.put("status", associate.getStatus());
+        param.put("status", associate.getStatus().name());
 
         jdbcTemplate.update(sql, param);
 
@@ -43,12 +44,12 @@ public class AssociateRepository implements AssociateDataProvider {
 
     @Override
     public Optional<Associate> update(Associate associate) {
-        var sql = getSql(basePath.concat("updateAssociate.sql"));
+        var sql = getSql(basePath.concat("/updateAssociate.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("id", associate.getId());
         param.put("name", associate.getName());
         param.put("cpf", associate.getCpf());
-        param.put("status", associate.getStatus());
+        param.put("status", associate.getStatus().name());
 
         jdbcTemplate.update(sql, param);
 
@@ -62,7 +63,7 @@ public class AssociateRepository implements AssociateDataProvider {
             Map<String, Object> param = new HashMap<>();
             param.put("id", id);
 
-            var sql = getSql(basePath.concat("findAssociateById.sql"));
+            var sql = getSql(basePath.concat("/findAssociateById.sql"));
             var associate = jdbcTemplate.queryForObject(sql, param, rowMapper);
             return associate == null ? Optional.empty() : Optional.of(associate);
 
@@ -73,25 +74,28 @@ public class AssociateRepository implements AssociateDataProvider {
 
     @Override
     public List<Associate> findAll(AssociateFilterVO vo) {
+        var page = isEmpty(vo.getPage()) ? 0 : vo.getSize();
+        var size = isEmpty(vo.getSize()) ? 10 : vo.getSize();
+
         Map<String, Object> param = new HashMap<>();
         param.put("cpf", vo.getCpf());
-        param.put("page", vo.getPage());
-        param.put("size", vo.getSize());
+        param.put("page", page);
+        param.put("size", size);
 
-        var sql = getSql(basePath.concat("findAllAssociate.sql"));
+        var sql = getSql(basePath.concat("/findAllAssociate.sql"));
         return jdbcTemplate.query(sql, param, rowMapper);
     }
 
     @Override
     public boolean existsCpfInAnotherAssociate(String cpf, String associateId) {
-        var sql = getSql(basePath.concat("existsCpfInAnotherAssociate.sql"));
+        var sql = getSql(basePath.concat("/existsCpfInAnotherAssociate.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("cpf",cpf);
         param.put("id", associateId);
 
 
-        var result = jdbcTemplate.queryForObject(sql, param, rowMapper);
-        return result != null;
+        var result = jdbcTemplate.queryForObject(sql, param, Integer.class);
+        return result != null && result == 1;
     }
 
     private final RowMapper<Associate> rowMapper = (rs, row) -> {

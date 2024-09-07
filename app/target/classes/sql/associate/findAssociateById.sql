@@ -2,6 +2,6 @@ SELECT
     id,
     name,
     cpf,
-    status,
+    status
 FROM associate
 WHERE id = :id
