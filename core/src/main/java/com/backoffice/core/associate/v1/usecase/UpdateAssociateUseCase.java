@@ -8,6 +8,8 @@ import javax.inject.Named;
 import java.util.Optional;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+
 
 @Named
 public class UpdateAssociateUseCase extends AssociateUseCaseAbstract {
@@ -27,12 +29,11 @@ public class UpdateAssociateUseCase extends AssociateUseCaseAbstract {
         var optionalAssociate = dataProvider.findById(associate.getId())
                 .orElseThrow(() -> new AssociateException(String.format("Associate %s not found", associate.getId())));
 
-
-        if (!associate.getCpf().isEmpty()) {
+        if (nonNull(associate.getCpf())) {
             optionalAssociate.setCpf(associate.getCpf());
         }
 
-        if (!associate.getName().isBlank()) {
+        if (nonNull(associate.getName())) {
             optionalAssociate.setName(associate.getName());
         }
 

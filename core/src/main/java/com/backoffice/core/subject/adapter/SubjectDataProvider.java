@@ -1,16 +1,16 @@
 package com.backoffice.core.subject.adapter;
 
 import com.backoffice.core.subject.model.Subject;
-import com.backoffice.core.subject.response.SubjectResponseVO;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Optional;
 
 public interface SubjectDataProvider {
 
-    void save(Subject subject);
+    Optional<Subject> save(Subject subject);
 
-    List<SubjectResponseVO> findAllByCreateDate(LocalDateTime localDate);
+    boolean existsByDescription(Subject subject);
 
-    List<SubjectResponseVO> findAll();
+    Optional<Subject> findById(String id);
+
+    void disableSubject(String id);
 }

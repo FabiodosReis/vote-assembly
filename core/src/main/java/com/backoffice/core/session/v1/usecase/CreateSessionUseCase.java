@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import javax.inject.Named;
 import java.util.UUID;
 
+import static java.util.Objects.isNull;
+
 @Named
 @RequiredArgsConstructor
 public class CreateSessionUseCase {
@@ -17,7 +19,7 @@ public class CreateSessionUseCase {
     public void execute(Session session) throws SessionException {
         session.setId(UUID.randomUUID().toString());
 
-        if (session.getDescription().isEmpty()) {
+        if (isNull(session.getDescription()) || session.getDescription().isEmpty()) {
             throw new SessionException("The Session description is required");
         }
 

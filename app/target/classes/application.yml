@@ -19,6 +19,8 @@ sql:
   base-path:
     associate: 'associate'
     session: 'session'
+    subject: 'subject'
+    vote: 'vote'
 
 
 

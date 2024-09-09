@@ -12,7 +12,7 @@
     <groupId>com.backoffice</groupId>
     <artifactId>vote-assembly</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>vote-assembly</name>
+    <name>api-vote-assembly</name>
     <description>Demo project for Vote assembly</description>
     <packaging>pom</packaging>
 
@@ -24,7 +24,6 @@
         <jacoco.version>0.8.12</jacoco.version>
         <junit.jupiter.version>5.11.0-M2</junit.jupiter.version>
     </properties>
-
 
     <modules>
         <module>core</module>
@@ -46,66 +45,42 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <build>
+        <testResources>
+            <testResource>
+                <directory>core/src/test/resources</directory>
+            </testResource>
+            <testResource>
+                <directory>app/src/test/resources</directory>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>default-testCompile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                        <configuration>
-                            <compileSourceRoots>
-                                <compileSourceRoot>core/src/test/java</compileSourceRoot>
-                                <compileSourceRoot>app/src/test/java</compileSourceRoot>
-                            </compileSourceRoots>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.3.1</version>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>app/src/main/java/AppApplication</mainClass>
+                        </manifest>
+                    </archive>
+                    <finalName>api-vote-assembly</finalName>
+                </configuration>
             </plugin>
         </plugins>
     </build>

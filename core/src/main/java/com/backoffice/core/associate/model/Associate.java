@@ -6,15 +6,13 @@ import com.backoffice.core.associate.enums.StatusAssociateEnum;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
-
 
 @Setter @Getter
 public class Associate {
 
 
     public Associate(String id, String name, String cpf) {
-        if(Objects.nonNull(id) && !id.isEmpty()) this.id = id;
+        this.id = id;
         this.name = name;
         this.cpf = cpf;
         this.status = StatusAssociateEnum.ABLE_TO_VOTE;

@@ -1,7 +1,0 @@
-com\backoffice\app\utils\FileUtils.class
-com\backoffice\app\associate\AssociateRepository.class
-com\backoffice\app\subject\SubjectRepository.class
-com\backoffice\app\config\DataSourceConfig.class
-com\backoffice\app\session\SessionRepository.class
-com\backoffice\app\vote\VoteRepository.class
-com\backoffice\app\AppApplication.class

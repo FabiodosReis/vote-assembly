@@ -2,9 +2,13 @@ package com.backoffice.core.vote.adapter;
 
 import com.backoffice.core.vote.model.Vote;
 
+import java.util.Optional;
+
 public interface VoteDataProvider {
 
-    void save(Vote vote);
+    Optional<Vote> save(Vote vote);
 
-    boolean isAssociateAlreadyVote(String voteId, String associateId);
+    boolean isAssociateAlreadyVoted(String subjectId, String associateId);
+
+    Optional<Vote> findById(String id);
 }

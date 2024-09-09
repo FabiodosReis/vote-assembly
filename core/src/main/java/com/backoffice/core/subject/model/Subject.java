@@ -5,31 +5,24 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.UUID;
 
 @Getter
 @Setter
 public class Subject {
 
-    public Subject(String description) {
+    public Subject(String id, String description, String sessionId, LocalDateTime endDate) {
         var now = LocalDateTime.now(ZoneId.of("UTC"));
-        this.id = UUID.randomUUID().toString();
+        this.id = id;
         this.description = description;
         this.startDate = now;
-        this.endDate = now.plusMinutes(1);
-    }
-
-    public Subject(LocalDateTime endDate, String description) {
-        var now = LocalDateTime.now(ZoneId.of("UTC"));
-        this.id = UUID.randomUUID().toString();
-        this.description = description;
-        this.startDate = now;
-        this.endDate = endDate == null ? now.plusMinutes(1) : endDate;
+        if(endDate == null) this.endDate = now.plusMinutes(1);
+        this.sessionId = sessionId;
     }
 
     private String id;
     private String description;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private String sessionId;
 
 }

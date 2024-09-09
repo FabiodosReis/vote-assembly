@@ -1,3 +1,3 @@
 UPDATE session SET
-endDate = :endDate
+end_date = :endDate
 WHERE id = :id

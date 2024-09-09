@@ -1,6 +1,6 @@
 C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\subject\v1\usecase\CreateSubjectUseCase.java
+C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\session\v1\usecase\CloseSessionUseCase.java
 C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\associate\adapter\AssociateDataProvider.java
-C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\subject\v1\usecase\FindSubjectUserCase.java
 C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\vote\model\Vote.java
 C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\subject\adapter\SubjectDataProvider.java
 C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\associate\enums\StatusAssociateEnum.java
@@ -18,6 +18,7 @@ C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\ba
 C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\session\v1\usecase\CreateSessionUseCase.java
 C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\session\model\Session.java
 C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\associate\v1\usecase\AssociateUseCaseAbstract.java
+C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\subject\v1\usecase\DisableSubjectUseCase.java
 C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\associate\v1\usecase\CreateAssociateUseCase.java
 C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\vote\exception\VoteException.java
 C:\Users\Dell\Documents\workSpaceInteliJ\vote-assembly\core\src\main\java\com\backoffice\core\subject\model\Subject.java

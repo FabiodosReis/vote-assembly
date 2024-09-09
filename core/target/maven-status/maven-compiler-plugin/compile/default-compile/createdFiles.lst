@@ -1,6 +1,6 @@
 com\backoffice\core\session\model\Session.class
 com\backoffice\core\subject\adapter\SubjectDataProvider.class
-com\backoffice\core\subject\v1\usecase\FindSubjectUserCase.class
+com\backoffice\core\subject\v1\usecase\DisableSubjectUseCase.class
 com\backoffice\core\associate\vo\AssociateFilterVO.class
 com\backoffice\core\associate\v1\usecase\UpdateAssociateUseCase.class
 com\backoffice\core\vote\adapter\VoteDataProvider.class
@@ -18,10 +18,12 @@ com\backoffice\core\associate\v1\usecase\FindByIdAssociateUseCase.class
 com\backoffice\core\associate\v1\usecase\AssociateUseCaseAbstract.class
 com\backoffice\core\subject\exception\SubjectException.class
 com\backoffice\core\vote\exception\VoteException.class
+com\backoffice\core\session\v1\usecase\CloseSessionUseCase.class
 com\backoffice\core\session\v1\usecase\CreateSessionUseCase.class
 com\backoffice\core\subject\response\SubjectResponseVO.class
 com\backoffice\core\subject\response\SubjectResponseVO$SubjectResponseVOBuilder.class
 com\backoffice\core\subject\model\Subject.class
 com\backoffice\core\vote\enums\VoteStatusEnum.class
+com\backoffice\core\associate\vo\AssociateFilterVO$AssociateFilterVOBuilder.class
 com\backoffice\core\session\adapter\SessionDataProvider.class
 com\backoffice\core\associate\v1\usecase\FindAllAssociateUseCase.class

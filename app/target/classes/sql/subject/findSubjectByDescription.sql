@@ -1,0 +1,1 @@
+SELECT EXISTS(SELECT 1 FROM subject WHERE description = :description AND id != :id)

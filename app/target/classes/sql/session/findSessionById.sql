@@ -1,7 +1,7 @@
 SELECT
     id,
     description,
-    startDate,
-    endDate
+    start_date,
+    end_date
 FROM session
 WHERE id = :id

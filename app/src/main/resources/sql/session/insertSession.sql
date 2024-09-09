@@ -1,7 +1,7 @@
 INSERT INTO `session` (
     id,
     description,
-    startDate
+    start_date
 ) VALUES(
     :id,
     :description,

@@ -78,8 +78,8 @@ public class SessionRepository implements SessionDataProvider {
                 rs.getString("id"),
                 rs.getString("description")
         );
-        session.setStartDate(rs.getTimestamp("startDate").toLocalDateTime());
-        session.setEndDate(rs.getTimestamp("endDate") != null ? rs.getTimestamp("endDate").toLocalDateTime() : null);
+        session.setStartDate(rs.getTimestamp("start_date").toLocalDateTime());
+        session.setEndDate(rs.getTimestamp("end_date") != null ? rs.getTimestamp("end_date").toLocalDateTime() : null);
 
         return session;
     };
