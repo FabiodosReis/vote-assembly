@@ -11,11 +11,15 @@
         <module name="core" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="test" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="app" options="-parameters" />
       <module name="core" options="-parameters" />
+      <module name="test" options="-parameters" />
       <module name="vote-assembly" options="-parameters" />
     </option>
   </component>

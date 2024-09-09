@@ -10,15 +10,12 @@
 	</parent>
 
 	<artifactId>app</artifactId>
-	<version>${parent.version}</version>
+	<version>${project.parent.version}</version>
 	<name>app</name>
 
 	<properties>
-		<java.version>17</java.version>
 		<liquibase.version>4.17.2</liquibase.version>
-		<java.jwt.version>4.4.0</java.jwt.version>
 		<mysql.version>8.0.28</mysql.version>
-		<junit.jupiter.version>5.11.0-M2</junit.jupiter.version>
 		<mockito.version>5.12.0</mockito.version>
 		<jacoco.version>0.8.12</jacoco.version>
 		<actuator.version>3.3.3</actuator.version>
@@ -27,6 +24,7 @@
 	</properties>
 
 	<dependencies>
+		<!-- core -->
 		<dependency>
 			<groupId>com.backoffice</groupId>
 			<artifactId>core</artifactId>
@@ -110,6 +108,18 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!--<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -151,5 +161,5 @@
 				</executions>
 			</plugin>
 		</plugins>
-	</build>
+	</build> -->
 </project>

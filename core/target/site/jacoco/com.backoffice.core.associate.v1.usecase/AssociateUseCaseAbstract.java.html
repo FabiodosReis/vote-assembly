@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AssociateUseCaseAbstract.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">core</a> &gt; <a href="index.source.html" class="el_package">com.backoffice.core.associate.v1.usecase</a> &gt; <span class="el_source">AssociateUseCaseAbstract.java</span></div><h1>AssociateUseCaseAbstract.java</h1><pre class="source lang-java linenums">package com.backoffice.core.associate.v1.usecase;
+
+import com.backoffice.core.associate.adapter.AssociateDataProvider;
+import com.backoffice.core.associate.enums.StatusAssociateEnum;
+import com.backoffice.core.associate.exception.AssociateException;
+import com.backoffice.core.associate.model.Associate;
+import lombok.RequiredArgsConstructor;
+
+import java.util.regex.Pattern;
+
+import static java.util.Objects.isNull;
+
+<span class="fc" id="L13">@RequiredArgsConstructor</span>
+public abstract class AssociateUseCaseAbstract {
+
+    private final AssociateDataProvider dataProvider;
+<span class="fc" id="L17">    private final Pattern CPF_FORMATED = Pattern.compile(&quot;(\\d{3})[.](\\d{3})[.](\\d{3})-(\\d{2})&quot;);</span>
+
+    protected void validate(Associate associate) throws AssociateException {
+<span class="pc bpc" id="L20" title="1 of 4 branches missed.">        if (isNull(associate.getCpf()) || associate.getCpf().isEmpty()) {</span>
+<span class="fc" id="L21">            throw new AssociateException(&quot;Associate cpf is required&quot;);</span>
+        }
+
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (!CPF_FORMATED.matcher(associate.getCpf()).matches()) {</span>
+<span class="fc" id="L25">            throw new AssociateException(&quot;cpf need to formated&quot;);</span>
+        }
+
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        if (dataProvider.existsCpfInAnotherAssociate(associate.getCpf(), associate.getId())) {</span>
+<span class="fc" id="L29">            throw new AssociateException(String.format(&quot;Cpf %s already exist&quot;, associate.getCpf()));</span>
+        }
+
+<span class="pc bpc" id="L32" title="1 of 4 branches missed.">        if (isNull(associate.getName()) || associate.getName().isEmpty()) {</span>
+<span class="fc" id="L33">            throw new AssociateException(&quot;Associate name is required&quot;);</span>
+        }
+<span class="fc" id="L35">    }</span>
+
+    protected void configStatus(Associate associate) {
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (associate.isAbleToVote()) {</span>
+<span class="fc" id="L39">            associate.setStatus(StatusAssociateEnum.ABLE_TO_VOTE);</span>
+        } else {
+<span class="fc" id="L41">            associate.setStatus(StatusAssociateEnum.UNABLE_TO_VOTE);</span>
+        }
+<span class="fc" id="L43">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
