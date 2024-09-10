@@ -20,7 +20,7 @@
       <module name="app" options="-parameters" />
       <module name="core" options="-parameters" />
       <module name="test" options="-parameters" />
-      <module name="vote-assembly" options="-parameters" />
+      <module name="vote-assembly" options="" />
     </option>
   </component>
 </project>

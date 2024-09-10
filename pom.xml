@@ -23,7 +23,29 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jacoco.version>0.8.12</jacoco.version>
         <junit.jupiter.version>5.11.0</junit.jupiter.version>
+        <spring.profiles.active>staging</spring.profiles.active>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>staging</id>
+            <activation>
+                <property>
+                    <name>spring.profiles.active</name>
+                    <value>staging</value>
+                </property>
+            </activation>
+        </profile>
+        <profile>
+            <id>production</id>
+            <activation>
+                <property>
+                    <name>spring.profiles.active</name>
+                    <value>production</value>
+                </property>
+            </activation>
+        </profile>
+    </profiles>
 
     <modules>
         <module>core</module>
@@ -70,31 +92,18 @@
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <mainClass>app/src/main/java/AppApplication</mainClass>
+                            <mainClass>com.backoffice.app.AppApplication</mainClass>
                             <finalName>api-vote-assembly</finalName>
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.3.1</version>
+                <configuration>
+                    <argLine>-Dspring.profiles.active=${spring.profiles.active}</argLine>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
