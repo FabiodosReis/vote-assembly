@@ -23,27 +23,24 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jacoco.version>0.8.12</jacoco.version>
         <junit.jupiter.version>5.11.0</junit.jupiter.version>
-        <spring.profiles.active>staging</spring.profiles.active>
+        <spring.profiles.active>${profile.active}</spring.profiles.active>
     </properties>
 
     <profiles>
         <profile>
             <id>staging</id>
             <activation>
-                <property>
-                    <name>spring.profiles.active</name>
-                    <value>staging</value>
-                </property>
+                <activeByDefault>true</activeByDefault>
             </activation>
+            <properties>
+                <profile.active>staging</profile.active>
+            </properties>
         </profile>
         <profile>
             <id>production</id>
-            <activation>
-                <property>
-                    <name>spring.profiles.active</name>
-                    <value>production</value>
-                </property>
-            </activation>
+            <properties>
+                <profile.active>production</profile.active>
+            </properties>
         </profile>
     </profiles>
 

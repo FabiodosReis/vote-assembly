@@ -1,9 +1,0 @@
-com\backoffice\core\associate\v1\usecase\CreateAssociateUseCaseTest.class
-com\backoffice\core\associate\v1\usecase\UpdateAssociateUseCaseTest.class
-com\backoffice\core\associate\v1\usecase\dataProvider\FindDataProviderTest.class
-com\backoffice\core\associate\v1\usecase\dataProvider\CreateAssociateDataProviderTest.class
-com\backoffice\core\associate\v1\usecase\FindAllAssociateUseCaseTest.class
-com\backoffice\core\associate\v1\usecase\dataProvider\NotFoundAssociateDataProviderTest.class
-com\backoffice\core\associate\v1\usecase\dataProvider\UpdateAssociateDataProviderTest.class
-com\backoffice\core\associate\v1\usecase\dataProvider\CpfAlreadyExistsAssociateDataProviderTest.class
-com\backoffice\core\associate\v1\usecase\findByIdAssociateUseCaseTest.class

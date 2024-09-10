@@ -1,1 +1,0 @@
-SELECT EXISTS(SELECT 1 FROM associate WHERE cpf = :cpf AND id != :id)
