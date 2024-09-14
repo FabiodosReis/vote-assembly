@@ -16,7 +16,7 @@ public class CreateSessionUseCase {
 
     private final SessionDataProvider dataProvider;
 
-    public void execute(Session session) throws SessionException {
+    public Session execute(Session session) throws SessionException {
         session.setId(UUID.randomUUID().toString());
 
         if (isNull(session.getDescription()) || session.getDescription().isEmpty()) {
@@ -27,7 +27,8 @@ public class CreateSessionUseCase {
             throw new SessionException("The Session description already Exists");
         }
 
-        dataProvider.save(session);
+        return dataProvider.save(session)
+                .orElseGet(null);
     }
 
 }

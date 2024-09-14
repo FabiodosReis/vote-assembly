@@ -1,8 +1,8 @@
 package com.backoffice.core.session.v1.usecase;
 
-import com.backoffice.core.associate.exception.AssociateException;
 import com.backoffice.core.session.adapter.SessionDataProvider;
 import com.backoffice.core.session.exception.SessionException;
+import com.backoffice.core.session.model.Session;
 import lombok.RequiredArgsConstructor;
 
 import javax.inject.Named;
@@ -15,14 +15,14 @@ public class CloseSessionUseCase {
 
     private final SessionDataProvider dataProvider;
 
-    public void execute(String id) throws SessionException {
+    public Session execute(String id) throws SessionException {
 
         var optionalSession = dataProvider.findById(id)
-                .orElseThrow(() -> new AssociateException(String.format("Session %s not found", id)));
+                .orElseThrow(() -> new SessionException(String.format("Session %s not found", id)));
 
         optionalSession.setEndDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-        dataProvider.closeSession(optionalSession);
-
+        return dataProvider.closeSession(optionalSession)
+                .orElseGet(null);
     }
 }
