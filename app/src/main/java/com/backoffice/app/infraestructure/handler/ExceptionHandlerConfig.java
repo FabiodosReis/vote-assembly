@@ -1,4 +1,4 @@
-package com.backoffice.app.config.handler;
+package com.backoffice.app.infraestructure.handler;
 
 import com.backoffice.core.exception.VoteAssemblyException;
 import lombok.extern.log4j.Log4j2;

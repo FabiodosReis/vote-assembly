@@ -2,23 +2,29 @@ package com.backoffice.core.vote.v1.usecase;
 
 import com.backoffice.core.associate.adapter.AssociateDataProvider;
 import com.backoffice.core.associate.enums.StatusAssociateEnum;
+import com.backoffice.core.subject.adapter.SubjectDataProvider;
 import com.backoffice.core.vote.adapter.VoteDataProvider;
 import com.backoffice.core.vote.exception.VoteException;
 import com.backoffice.core.vote.model.Vote;
 import lombok.RequiredArgsConstructor;
 
 import javax.inject.Named;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.UUID;
 
 @Named
 @RequiredArgsConstructor
-public class CreateVoteUserCase {
+public class CreateVoteUseCase {
 
     private final VoteDataProvider dataProvider;
     private final AssociateDataProvider associateDataProvider;
+    private final SubjectDataProvider subjectDataProvider;
 
-    public void execute(Vote vote) throws VoteException {
+    public Vote execute(Vote vote) throws VoteException {
         vote.setId(UUID.randomUUID().toString());
+
+        var subject = subjectDataProvider.findById(vote.getSubjectId());
 
         var associate = associateDataProvider.findById(vote.getAssociateId())
                 .orElseThrow(() -> new VoteException(String.format("Associate %s not found", vote.getAssociateId())));
@@ -31,6 +37,15 @@ public class CreateVoteUserCase {
             throw new VoteException(String.format("Associate %s already voted", vote.getAssociateId()));
         }
 
-        dataProvider.save(vote);
+        if (subject.isEmpty()) {
+            throw new VoteException(String.format("Subject %s not found", vote.getSubjectId()));
+        }
+
+        if(LocalDateTime.now(ZoneId.of("UTC")).isAfter(subject.get().getEndDate())){
+            throw new VoteException(String.format("Subject %s closed", vote.getSubjectId()));
+        }
+
+        return dataProvider.save(vote)
+                .orElseGet(null);
     }
 }

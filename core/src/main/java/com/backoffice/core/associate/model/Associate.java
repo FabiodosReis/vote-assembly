@@ -15,7 +15,7 @@ public class Associate {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
-        this.status = StatusAssociateEnum.ABLE_TO_VOTE;
+        this.status = isAbleToVote() ? StatusAssociateEnum.ABLE_TO_VOTE : StatusAssociateEnum.UNABLE_TO_VOTE;
     }
 
     private String id;

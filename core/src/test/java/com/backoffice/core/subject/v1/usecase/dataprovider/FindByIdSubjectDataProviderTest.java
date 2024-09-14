@@ -7,21 +7,26 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public class CreateSubjectDataProviderDescriptionAlreadyExistsTest implements SubjectDataProvider {
+public class FindByIdSubjectDataProviderTest implements SubjectDataProvider {
 
     @Override
     public Optional<Subject> save(Subject subject) {
-        return Optional.of(subject);
+        return Optional.empty();
     }
 
     @Override
     public boolean existsByDescription(Subject subject) {
-        return true;
+        return false;
     }
 
     @Override
     public Optional<Subject> findById(String id) {
-        return Optional.empty();
+        var subject = new Subject(
+                "0191f18b-3392-7969-8326-31bc609c0661",
+                "test",
+                "0191f18b-5acc-7109-afad-fe03470909c6"
+        );
+        return Optional.of(subject);
     }
 
     @Override

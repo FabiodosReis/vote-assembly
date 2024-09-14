@@ -1,4 +1,4 @@
-package com.backoffice.app.config;
+package com.backoffice.app.infraestructure.datasource;
 
 import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.PersistenceUnit;

@@ -3,6 +3,8 @@ package com.backoffice.core.subject.v1.usecase.dataprovider;
 import com.backoffice.core.subject.adapter.SubjectDataProvider;
 import com.backoffice.core.subject.model.Subject;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 public class CreateSubjectDataProviderTest implements SubjectDataProvider {
@@ -23,7 +25,18 @@ public class CreateSubjectDataProviderTest implements SubjectDataProvider {
     }
 
     @Override
-    public void disableSubject(String id) {
+    public void disableSubject(String id, LocalDateTime endDate) {
 
     }
+
+    @Override
+    public List<Subject> findAllBySessionId(String id) {
+        return List.of();
+    }
+
+    @Override
+    public void close(String id, LocalDateTime endDate) {
+
+    }
+
 }

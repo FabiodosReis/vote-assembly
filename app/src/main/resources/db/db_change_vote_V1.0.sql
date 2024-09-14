@@ -20,8 +20,7 @@ INSERT INTO vote (
     associate_id
 ) VALUES(
     '0191d2f4-302f-7399-94bb-3d3317f09ba5',
-    'subject 1',
-    NOW(),
+    'YES',
     NOW(),
     '53dc8338-bff4-467b-b8a5-7d4a554dd8af',
     'd6f2db9a-d7c9-4b10-b23e-0bb1ca90ffab'

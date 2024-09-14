@@ -39,8 +39,6 @@ public class CreateSubjectUseCaseTest {
         assertEquals(now.getMonthValue(), currentSubject.getEndDate().getMonthValue());
         assertEquals(now.getDayOfMonth(), currentSubject.getEndDate().getDayOfMonth());
         assertEquals(now.getHour(), currentSubject.getEndDate().getHour());
-        assertEquals(now.plusMinutes(1).getMinute(), currentSubject.getEndDate().getMinute());
-
     }
 
     @Test

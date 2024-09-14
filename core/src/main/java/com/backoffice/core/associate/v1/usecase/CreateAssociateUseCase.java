@@ -12,7 +12,7 @@ import java.util.UUID;
 @Named
 public class CreateAssociateUseCase extends AssociateUseCaseAbstract {
 
-    public CreateAssociateUseCase(AssociateDataProvider associateDataProvider){
+    public CreateAssociateUseCase(AssociateDataProvider associateDataProvider) {
         super(associateDataProvider);
         this.dataProvider = associateDataProvider;
     }
@@ -22,7 +22,6 @@ public class CreateAssociateUseCase extends AssociateUseCaseAbstract {
     public Optional<Associate> execute(Associate associate) throws AssociateException {
         associate.setId(UUID.randomUUID().toString());
         validate(associate);
-        configStatus(associate);
 
         return dataProvider.save(associate);
     }

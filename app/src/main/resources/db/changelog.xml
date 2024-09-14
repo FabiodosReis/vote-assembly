@@ -9,6 +9,7 @@
     <include file="db/db_change_associate_V1.0.sql"></include>
     <include file="db/db_change_session_V1.0.sql"></include>
     <include file="db/db_change_subject_V1.0.sql"></include>
+    <include file="db/db_change_vote_V1.0.sql"></include>
 
 
 

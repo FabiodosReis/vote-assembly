@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 
 import javax.inject.Named;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import static java.util.Objects.isNull;
 
 @Named
@@ -17,14 +20,14 @@ public class DisableSubjectUseCase {
 
     public void execute(String id) throws SubjectException {
 
-        if(isNull(id) || id.isBlank()){
+        if (isNull(id) || id.isBlank()) {
             throw new SubjectException("id is required");
         }
 
         var subject = dataProvider.findById(id)
-                        .orElseThrow(() -> new SubjectException("Subject not found"));
+                .orElseThrow(() -> new SubjectException("Subject not found"));
 
-        dataProvider.disableSubject(subject.getId());
+        dataProvider.disableSubject(subject.getId(), LocalDateTime.now(ZoneId.of("UTC")));
     }
 
 }

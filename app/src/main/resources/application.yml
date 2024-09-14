@@ -21,6 +21,11 @@ sql:
     session: 'session'
     subject: 'subject'
     vote: 'vote'
+aws:
+  bucket:
+    session: "vote-assembly"
+  access-key:
+  secret-key:
 
 
 

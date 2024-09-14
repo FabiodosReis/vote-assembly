@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.*;
 public class AssociateController {
 
 
-    private final AssociateUseCaseMediator mediator;
+    private final AssociateUseCaseFacade facade;
 
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
     public AssociateResponseVO findById(@PathVariable("id") String id) {
-        var associate = mediator.findByIdAssociateUseCase.execute(id);
+        var associate = facade.findByIdAssociateUseCase.execute(id);
         return associate.map(AssociateResponseVO::new).orElse(null);
     }
 
@@ -33,7 +33,7 @@ public class AssociateController {
             @RequestParam(value = "page", required = false) Integer page,
             @RequestParam(value = "cpf", required = false) String cpf
     ) {
-        var associateList = mediator.findAllAssociateUseCase.execute(
+        var associateList = facade.findAllAssociateUseCase.execute(
                 AssociateFilterVO.builder()
                         .size(size)
                         .page(page)
@@ -54,7 +54,7 @@ public class AssociateController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void save(@RequestBody AssociateCreateRequestVO vo) {
-        mediator.createAssociateUseCase.execute(
+        facade.createAssociateUseCase.execute(
                 vo.toEntity()
         );
     }
@@ -67,7 +67,7 @@ public class AssociateController {
     ) {
 
         vo.setId(id);
-        mediator.updateAssociateUseCase.execute(
+        facade.updateAssociateUseCase.execute(
                 vo.toEntity()
         );
     }

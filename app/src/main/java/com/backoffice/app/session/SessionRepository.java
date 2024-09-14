@@ -2,6 +2,9 @@ package com.backoffice.app.session;
 
 import com.backoffice.core.session.adapter.SessionDataProvider;
 import com.backoffice.core.session.model.Session;
+import com.backoffice.core.session.vo.SessionFilterVO;
+import com.backoffice.core.session.vo.SessionVO;
+import com.backoffice.core.session.vo.VoteVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -10,10 +13,12 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import static com.backoffice.app.utils.FileUtils.getSql;
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @Repository
 @RequiredArgsConstructor
@@ -64,10 +69,36 @@ public class SessionRepository implements SessionDataProvider {
     }
 
     @Override
+    public List<SessionVO> findAll(SessionFilterVO vo) {
+        var page = isEmpty(vo.getPage()) ? 0 : vo.getSize();
+        var size = isEmpty(vo.getSize()) ? 10 : vo.getSize();
+
+        Map<String, Object> param = new HashMap<>();
+        param.put("page", page);
+        param.put("size", size);
+
+        var sql = getSql(basePath.concat("/FindAllSessions.sql"));
+        return jdbcTemplate.query(sql, param, rowMapperFindAll);
+    }
+
+    @Override
+    public List<String[]> findAllCsv(SessionFilterVO vo) {
+        var page = isEmpty(vo.getPage()) ? 0 : vo.getSize();
+        var size = isEmpty(vo.getSize()) ? 10 : vo.getSize();
+
+        Map<String, Object> param = new HashMap<>();
+        param.put("page", page);
+        param.put("size", size);
+
+        var sql = getSql(basePath.concat("/FindAllSessionCSV.sql"));
+        return jdbcTemplate.query(sql, param, rowMapperFile);
+    }
+
+    @Override
     public boolean existsByDescription(String description) {
         var sql = getSql(basePath.concat("/existsAssociateByDescription.sql"));
         Map<String, Object> param = new HashMap<>();
-        param.put("description",description);
+        param.put("description", description);
 
         var result = jdbcTemplate.queryForObject(sql, param, Integer.class);
         return result != null && result == 1;
@@ -82,6 +113,28 @@ public class SessionRepository implements SessionDataProvider {
         session.setEndDate(rs.getTimestamp("end_date") != null ? rs.getTimestamp("end_date").toLocalDateTime() : null);
 
         return session;
+    };
+
+    private final RowMapper<SessionVO> rowMapperFindAll = (rs, row) -> SessionVO.builder()
+            .id(rs.getString("session_id"))
+            .description(rs.getString("session_description"))
+            .status(rs.getString("session_status"))
+            .votes(List.of(
+                    VoteVO.builder()
+                            .id(rs.getString("vote_id"))
+                            .voteStatus(rs.getString("vote_status"))
+                            .cpf(rs.getString("cpf"))
+                            .subjectId(rs.getString("subject_id"))
+                            .subjectStatus(rs.getString("subject_status"))
+                            .subjectDescription(rs.getString("subject_description"))
+                            .build()
+            ))
+            .build();
+
+    private final RowMapper<String[]> rowMapperFile = (rs, row) -> new String[]{
+            rs.getString("quantity"),
+            rs.getString("session_description"),
+            rs.getString("subject_description")
     };
 
 }

@@ -11,7 +11,7 @@
 
     <groupId>com.backoffice</groupId>
     <artifactId>vote-assembly</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <name>api-vote-assembly</name>
     <description>Demo project for Vote assembly</description>
     <packaging>pom</packaging>
@@ -90,7 +90,7 @@
                         </goals>
                         <configuration>
                             <mainClass>com.backoffice.app.AppApplication</mainClass>
-                            <finalName>api-vote-assembly</finalName>
+                            <finalName>api-vote-assembly-${project.version}</finalName>
                         </configuration>
                     </execution>
                 </executions>

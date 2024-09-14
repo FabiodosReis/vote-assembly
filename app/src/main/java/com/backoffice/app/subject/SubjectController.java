@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class SubjectController {
 
-    private final SubjectMediator mediator;
+    private final SubjectUseCaseFacade facade;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody SubjectRequestVO vo) {
-        mediator.createSubjectUseCase.execute(vo.toEntity());
+        facade.createSubjectUseCase.execute(vo.toEntity());
     }
 
     @PutMapping("/{id}/disable")
     @ResponseStatus(HttpStatus.OK)
     public void disable(@PathVariable("id") String id) {
-        mediator.disableSubjectUseCase.execute(id);
+        facade.disableSubjectUseCase.execute(id);
     }
 }

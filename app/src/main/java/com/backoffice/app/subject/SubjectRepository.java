@@ -9,7 +9,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -66,10 +68,30 @@ public class SubjectRepository implements SubjectDataProvider {
     }
 
     @Override
-    public void disableSubject(String id) {
+    public void disableSubject(String id, LocalDateTime endDate) {
         var sql = getSql(basePath.concat("/disableSubject.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("id", id);
+        param.put("endDate", endDate);
+
+        jdbcTemplate.update(sql, param);
+    }
+
+    @Override
+    public List<Subject> findAllBySessionId(String sessionId) {
+        Map<String, Object> param = new HashMap<>();
+        param.put("sessionId", sessionId);
+
+        var sql = getSql(basePath.concat("/FindAllSubjectBySessionId.sql"));
+        return jdbcTemplate.query(sql, param, rowMapper);
+    }
+
+    @Override
+    public void close(String id, LocalDateTime endDate) {
+        var sql = getSql(basePath.concat("/closeSubject.sql"));
+        Map<String, Object> param = new HashMap<>();
+        param.put("id", id);
+        param.put("endDate", endDate);
 
         jdbcTemplate.update(sql, param);
     }
@@ -86,5 +108,4 @@ public class SubjectRepository implements SubjectDataProvider {
 
         return subject;
     };
-
 }

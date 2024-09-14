@@ -38,7 +38,6 @@ public class UpdateAssociateUseCase extends AssociateUseCaseAbstract {
         }
 
         validate(associate);
-        configStatus(associate);
 
         return dataProvider.update(optionalAssociate);
     }

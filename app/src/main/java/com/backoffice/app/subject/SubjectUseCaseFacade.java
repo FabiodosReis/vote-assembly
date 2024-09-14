@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class SubjectMediator {
+public class SubjectUseCaseFacade {
 
     final CreateSubjectUseCase createSubjectUseCase;
     final DisableSubjectUseCase disableSubjectUseCase;

@@ -1,4 +1,4 @@
-package com.backoffice.app.config.handler;
+package com.backoffice.app.infraestructure.handler;
 
 import lombok.Builder;
 import lombok.Getter;

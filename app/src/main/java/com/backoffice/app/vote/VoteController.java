@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class VoteController {
 
-    private final VoteMediator voteMediator;
+    private final VoteUseCaseFacade facade;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -26,6 +26,6 @@ public class VoteController {
                 vo.getStatus()
         );
 
-        voteMediator.createVoteUserCase.execute(vote);
+        facade.createVoteUseCase.execute(vote);
     }
 }
