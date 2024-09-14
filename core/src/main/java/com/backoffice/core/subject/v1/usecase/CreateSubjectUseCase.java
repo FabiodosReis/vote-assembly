@@ -7,7 +7,6 @@ import com.backoffice.core.subject.exception.SubjectException;
 import lombok.RequiredArgsConstructor;
 
 import javax.inject.Named;
-import java.util.Optional;
 import java.util.UUID;
 
 import static java.util.Objects.isNull;
@@ -20,14 +19,14 @@ public class CreateSubjectUseCase {
     private final SubjectDataProvider dataProvider;
     private final SessionDataProvider sessionDataProvider;
 
-    public Optional<Subject> execute(Subject subject) throws SubjectException {
+    public Subject execute(Subject subject) throws SubjectException {
         subject.setId(UUID.randomUUID().toString());
 
         if (isNull(subject.getDescription()) || subject.getDescription().isBlank()) {
             throw new SubjectException("Subject description is required");
         }
 
-        if(dataProvider.existsByDescription(subject)){
+        if (dataProvider.existsByDescription(subject)) {
             throw new SubjectException("Subject description already exists");
         }
 
@@ -39,7 +38,8 @@ public class CreateSubjectUseCase {
             throw new SubjectException("Session not found");
         }
 
-        return dataProvider.save(subject);
+        return dataProvider.save(subject)
+                .orElseGet(null);
     }
 
 }
