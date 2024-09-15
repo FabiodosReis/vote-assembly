@@ -1,0 +1,14 @@
+package com.backoffice.app.application.api.facade;
+
+import com.backoffice.core.subject.v1.usecase.CreateSubjectUseCase;
+import com.backoffice.core.subject.v1.usecase.DisableSubjectUseCase;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
+public class SubjectUseCaseFacade {
+
+    public final CreateSubjectUseCase createSubjectUseCase;
+    public final DisableSubjectUseCase disableSubjectUseCase;
+  }

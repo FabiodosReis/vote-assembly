@@ -22,10 +22,13 @@ sql:
     subject: 'subject'
     vote: 'vote'
 aws:
-  bucket:
+  s3:
     session: "vote-assembly"
   access-key:
   secret-key:
+  sns:
+    topic:
+      session-vote: "arn:aws:sns:us-east-1:381492217956:topic_backoffice_session_vote"
 
 
 

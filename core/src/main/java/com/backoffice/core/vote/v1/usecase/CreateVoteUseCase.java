@@ -6,7 +6,6 @@ import com.backoffice.core.subject.adapter.SubjectDataProvider;
 import com.backoffice.core.vote.adapter.VoteDataProvider;
 import com.backoffice.core.vote.exception.VoteException;
 import com.backoffice.core.vote.model.Vote;
-import lombok.RequiredArgsConstructor;
 
 import javax.inject.Named;
 import java.time.LocalDateTime;
@@ -14,8 +13,17 @@ import java.time.ZoneId;
 import java.util.UUID;
 
 @Named
-@RequiredArgsConstructor
 public class CreateVoteUseCase {
+
+    public CreateVoteUseCase(
+            VoteDataProvider voteDataProvider,
+            AssociateDataProvider associateDataProvider,
+            SubjectDataProvider subjectDataProvider
+    ){
+        this.dataProvider = voteDataProvider;
+        this.associateDataProvider = associateDataProvider;
+        this.subjectDataProvider = subjectDataProvider;
+    }
 
     private final VoteDataProvider dataProvider;
     private final AssociateDataProvider associateDataProvider;
