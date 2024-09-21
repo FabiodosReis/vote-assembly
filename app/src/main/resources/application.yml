@@ -11,14 +11,17 @@ springdoc:
 
 spring:
   application:
-    name: vote-assembly
+    name: api-vote-assembly
+  liquibase:
+    change-log: classpath:/db/changelog.xml
+    enabled: false
   jpa:
     open-in-view: false
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-  liquibase:
-    change-log: classpath:/db/changelog.xml
+
+
 sql:
   base-path:
     associate: 'associate/'
@@ -28,8 +31,8 @@ sql:
 aws:
   s3:
     session: "vote-assembly"
-  access-key: ''
-  secret-key: ''
+  access-key:
+  secret-key:
   sns:
     topic:
       session-vote: "arn:aws:sns:us-east-1:381492217956:topic_backoffice_session_vote"

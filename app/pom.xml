@@ -5,7 +5,7 @@
 
 	<parent>
 		<groupId>com.backoffice</groupId>
-		<artifactId>vote-assembly</artifactId>
+		<artifactId>api-vote-assembly</artifactId>
 		<version>1.0.0-RELEASE</version>
 	</parent>
 
@@ -14,16 +14,17 @@
 	<name>app</name>
 
 	<properties>
-		<liquibase.version>4.17.2</liquibase.version>
+		<liquibase-maven-plugin.version>4.29.2</liquibase-maven-plugin.version>
 		<mysql.version>8.0.28</mysql.version>
 		<mockito.version>5.12.0</mockito.version>
-		<jacoco.version>0.8.12</jacoco.version>
 		<actuator.version>3.3.3</actuator.version>
 		<jackson.datatype.version>2.17.2</jackson.datatype.version>
 		<spring.cloud.version>2023.0.1</spring.cloud.version>
 		<spring.cloud.aws.version>3.1.1</spring.cloud.aws.version>
 		<aws.java.sdk.version>2.28.1</aws.java.sdk.version>
 		<springdoc.version>2.6.0</springdoc.version>
+		<opencsv.version>5.9</opencsv.version>
+		<logstash-logback.version>4.1</logstash-logback.version>
 	</properties>
 
 
@@ -116,7 +117,6 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
-			<version>${liquibase.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -126,6 +126,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-maven-plugin</artifactId>
+			<version>${liquibase-maven-plugin.version}</version>
 		</dependency>
 
 		<!-- utils -->
@@ -148,6 +153,18 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 			<version>${jackson.datatype.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>${opencsv.version}</version>
+		</dependency>
+
+		<!-- logging -->
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>${logstash-logback.version}</version>
+		</dependency>
 
 		<!-- doc -->
 		<dependency>
@@ -160,8 +177,54 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.12</version>
+				<executions>
+					<execution>
+						<id>jacoco-site-aggregate</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report-aggregate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<dataFileIncludes>
+						<dataFileInclude>**/jacoco.exec</dataFileInclude>
+					</dataFileIncludes>
+					<outputDirectory>${project.reporting.outputDirectory}/reports</outputDirectory>
+					<excludes>
+						<exclude>**/config/**/*</exclude>
+						<exclude>**/client/**/*</exclude>
+						<exclude>**/vo/**/*</exclude>
+						<exclude>**/model/**/*</exclude>
+						<exclude>**/exception/**/*</exclude>
+						<exclude>**/enums/**/*</exclude>
+						<exclude>**/constants/**/*</exclude>
+						<exclude>**/repository/**/*</exclude>
+						<exclude>**/adapter/**/*</exclude>
+						<exclude>**/AppApplication/**/*</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>${liquibase-maven-plugin.version}</version>
+				<configuration>
+					<propertyFileWillOverride>true</propertyFileWillOverride>
+					<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+					<driver>com.mysql.cj.jdbc.Driver</driver>
+					<username>${liquibase.datasource.name}</username>
+					<password>${liquibase.datasource.password}</password>
+					<url>${liquibase.datasource.url}</url>
+					<changeLogFile>classpath:/db/changelog.xml</changeLogFile>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
