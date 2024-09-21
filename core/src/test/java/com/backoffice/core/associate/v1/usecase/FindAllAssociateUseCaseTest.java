@@ -1,8 +1,8 @@
 package com.backoffice.core.associate.v1.usecase;
 
-import com.backoffice.core.associate.enums.StatusAssociateEnum;
-import com.backoffice.core.associate.v1.usecase.dataProvider.FindDataProviderTest;
-import com.backoffice.core.associate.vo.AssociateFilterVO;
+import com.backoffice.core.associate.v1.enums.StatusAssociateEnum;
+import com.backoffice.core.associate.v1.usecase.dataProvider.FindDataProcessTest;
+import com.backoffice.core.associate.v1.vo.AssociateFilterVO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ public class FindAllAssociateUseCaseTest {
 
     @BeforeEach
     public void setup() {
-        var dataProvider = new FindDataProviderTest();
+        var dataProvider = new FindDataProcessTest();
         useCase = new FindAllAssociateUseCase(dataProvider);
     }
 

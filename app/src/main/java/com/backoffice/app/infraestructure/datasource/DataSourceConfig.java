@@ -54,7 +54,6 @@ public class DataSourceConfig {
         properties.setProperty("hibernate.show_sql", "false");
         properties.setProperty("hibernate.hbm2ddl", "none");
         factoryBean.setJpaProperties(properties);
-
         factoryBean.setPackagesToScan("com.backoffice.app");
 
         return factoryBean;
@@ -66,18 +65,13 @@ public class DataSourceConfig {
         return new JdbcTransactionManager(dataSource());
     }
 
-    /*@Bean
-    public TransactionManager transactionManager() {
-        return new DataSourceTransactionManager(dataSource());
-    }*/
-
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
     }
 
     @Bean
-    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(){
+    public NamedParameterJdbcTemplate namedParameterJdbcTemplate() {
         return new NamedParameterJdbcTemplate(dataSource());
     }
 }

@@ -1,8 +1,8 @@
 package com.backoffice.core.associate.v1.usecase;
 
-import com.backoffice.core.associate.adapter.AssociateDataProvider;
-import com.backoffice.core.associate.model.Associate;
-import com.backoffice.core.associate.vo.AssociateFilterVO;
+import com.backoffice.core.associate.v1.adapter.AssociateDataProcess;
+import com.backoffice.core.associate.v1.model.Associate;
+import com.backoffice.core.associate.v1.vo.AssociateFilterVO;
 import lombok.RequiredArgsConstructor;
 
 import javax.inject.Named;
@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FindAllAssociateUseCase {
 
-    private final AssociateDataProvider dataProvider;
+    private final AssociateDataProcess dataProvider;
 
     public List<Associate> execute(AssociateFilterVO vo){
         return dataProvider.findAll(vo);

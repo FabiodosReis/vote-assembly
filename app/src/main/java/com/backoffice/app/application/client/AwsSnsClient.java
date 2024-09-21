@@ -1,5 +1,6 @@
 package com.backoffice.app.application.client;
 
+import com.backoffice.app.application.exception.SnsException;
 import com.backoffice.app.application.service.client.vo.SnsEventDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -43,10 +44,10 @@ public class AwsSnsClient {
                     .build()
             );
 
-            log.info("Message aws send successfully");
+            log.info("Message aws sent successfully");
 
         } catch (Exception e) {
-            throw new RuntimeException(e.getMessage(), e);
+            throw new SnsException(e.getMessage(), e);
         }
     }
 }

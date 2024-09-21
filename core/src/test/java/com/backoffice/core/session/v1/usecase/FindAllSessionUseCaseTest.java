@@ -1,7 +1,7 @@
 package com.backoffice.core.session.v1.usecase;
 
-import com.backoffice.core.session.v1.usecase.dataprovider.CreateSessionDataProviderTest;
-import com.backoffice.core.session.vo.SessionFilterVO;
+import com.backoffice.core.session.v1.usecase.dataprovider.CreateSessionDataProcessTest;
+import com.backoffice.core.session.v1.vo.SessionFilterVO;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +12,7 @@ public class FindAllSessionUseCaseTest {
 
     @Test
     void shouldFindALl(){
-        useCase = new FindAllSessionUseCase(new CreateSessionDataProviderTest());
+        useCase = new FindAllSessionUseCase(new CreateSessionDataProcessTest());
 
         var sessionListVO = useCase.execute(SessionFilterVO.builder().build());
 

@@ -3,7 +3,7 @@
 
 CREATE TABLE IF NOT EXISTS vote (
     id CHAR(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-    status VARCHAR(100) NOT NULL UNIQUE,
+    status VARCHAR(100) NOT NULL,
     create_date DATETIME NOT NULL DEFAULT NOW(),
     subject_id CHAR(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
     associate_id CHAR(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,

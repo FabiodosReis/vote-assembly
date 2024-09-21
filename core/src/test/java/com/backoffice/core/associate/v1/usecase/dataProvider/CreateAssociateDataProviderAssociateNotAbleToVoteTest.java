@@ -1,13 +1,13 @@
 package com.backoffice.core.associate.v1.usecase.dataProvider;
 
-import com.backoffice.core.associate.adapter.AssociateDataProvider;
-import com.backoffice.core.associate.model.Associate;
-import com.backoffice.core.associate.vo.AssociateFilterVO;
+import com.backoffice.core.associate.v1.adapter.AssociateDataProcess;
+import com.backoffice.core.associate.v1.model.Associate;
+import com.backoffice.core.associate.v1.vo.AssociateFilterVO;
 
 import java.util.List;
 import java.util.Optional;
 
-public class CreateAssociateDataProviderAssociateNotAbleToVoteTest implements AssociateDataProvider {
+public class CreateAssociateDataProviderAssociateNotAbleToVoteTest implements AssociateDataProcess {
 
     @Override
     public Optional<Associate> save(Associate associate) {

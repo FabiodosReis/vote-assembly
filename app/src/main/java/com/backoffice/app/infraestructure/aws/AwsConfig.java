@@ -1,7 +1,6 @@
 package com.backoffice.app.infraestructure.aws;
 
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +12,8 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.sns.SnsClient;
 import software.amazon.awssdk.services.sns.model.Topic;
+
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 @Configuration
 public class AwsConfig {
@@ -34,7 +35,7 @@ public class AwsConfig {
 
     @Bean @Primary
     public AwsCredentialsProvider awsCredentialsProvider() {
-        if (ObjectUtils.isEmpty(awsAccessKey) || ObjectUtils.isEmpty(awsSecretKey)) {
+        if (isEmpty(awsAccessKey) || isEmpty(awsSecretKey)) {
             return DefaultCredentialsProvider.create();
         }
         return () -> {

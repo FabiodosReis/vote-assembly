@@ -1,12 +1,13 @@
 package com.backoffice.core.subject.v1.usecase;
 
-import com.backoffice.core.session.adapter.SessionDataProvider;
-import com.backoffice.core.subject.model.Subject;
-import com.backoffice.core.subject.adapter.SubjectDataProvider;
-import com.backoffice.core.subject.exception.SubjectException;
+import com.backoffice.core.session.v1.adapter.SessionDataProcess;
+import com.backoffice.core.subject.v1.model.Subject;
+import com.backoffice.core.subject.v1.adapter.SubjectDataProcess;
+import com.backoffice.core.subject.v1.exception.SubjectException;
 import lombok.RequiredArgsConstructor;
 
 import javax.inject.Named;
+
 import java.util.UUID;
 
 import static java.util.Objects.isNull;
@@ -16,8 +17,8 @@ import static java.util.Objects.isNull;
 @RequiredArgsConstructor
 public class CreateSubjectUseCase {
 
-    private final SubjectDataProvider dataProvider;
-    private final SessionDataProvider sessionDataProvider;
+    private final SubjectDataProcess dataProvider;
+    private final SessionDataProcess sessionDataProcess;
 
     public Subject execute(Subject subject) throws SubjectException {
         subject.setId(UUID.randomUUID().toString());
@@ -34,8 +35,12 @@ public class CreateSubjectUseCase {
             throw new SubjectException("Session id is required");
         }
 
-        if (sessionDataProvider.findById(subject.getSessionId()).isEmpty()) {
+        if (sessionDataProcess.findById(subject.getSessionId()).isEmpty()) {
             throw new SubjectException("Session not found");
+        }
+
+        if(sessionDataProcess.sessionIsClosed(subject.getSessionId())){
+            throw new SubjectException("Session is closed");
         }
 
         return dataProvider.save(subject)

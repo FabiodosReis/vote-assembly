@@ -1,7 +1,7 @@
-package com.backoffice.app.application.service.client;
+package com.backoffice.app.application.client;
 
-import com.backoffice.app.application.api.vo.FileResponseVO;
-import com.backoffice.core.exception.FileGenerateException;
+import com.backoffice.app.application.api.v1.vo.FileResponseVO;
+import com.backoffice.app.application.exception.FileGenerateException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,13 +1,14 @@
 package com.backoffice.core.subject.v1.usecase;
 
-import com.backoffice.core.session.adapter.SessionDataProvider;
-import com.backoffice.core.session.v1.usecase.dataprovider.CloseSessionNotFoundDataProviderTest;
+import com.backoffice.core.session.v1.adapter.SessionDataProcess;
+import com.backoffice.core.session.v1.usecase.dataprovider.CloseSessionNotFoundDataProcessTest;
 import com.backoffice.core.session.v1.usecase.dataprovider.CreateSessionDataProviderSessionAlreadyExistsTest;
-import com.backoffice.core.subject.adapter.SubjectDataProvider;
-import com.backoffice.core.subject.exception.SubjectException;
-import com.backoffice.core.subject.model.Subject;
-import com.backoffice.core.subject.v1.usecase.dataprovider.CreateSubjectDataProviderDescriptionAlreadyExistsTest;
-import com.backoffice.core.subject.v1.usecase.dataprovider.CreateSubjectDataProviderTest;
+import com.backoffice.core.session.v1.usecase.dataprovider.SessionClosedDataProcessTest;
+import com.backoffice.core.subject.v1.adapter.SubjectDataProcess;
+import com.backoffice.core.subject.v1.exception.SubjectException;
+import com.backoffice.core.subject.v1.model.Subject;
+import com.backoffice.core.subject.v1.usecase.dataprovider.CreateSubjectDataProcessDescriptionAlreadyExistsTest;
+import com.backoffice.core.subject.v1.usecase.dataprovider.CreateSubjectDataProcessTest;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ public class CreateSubjectUseCaseTest {
 
     @Test
     void shouldCreateSubjectWithoutEndDate() {
-        setup(new CreateSubjectDataProviderTest(), new CreateSessionDataProviderSessionAlreadyExistsTest());
+        setup(new CreateSubjectDataProcessTest(), new CreateSessionDataProviderSessionAlreadyExistsTest());
 
         var subject = new Subject(
                 null,
@@ -43,7 +44,7 @@ public class CreateSubjectUseCaseTest {
 
     @Test
     void shouldCreateSubjectWithEndDate() {
-        setup(new CreateSubjectDataProviderTest(), new CreateSessionDataProviderSessionAlreadyExistsTest());
+        setup(new CreateSubjectDataProcessTest(), new CreateSessionDataProviderSessionAlreadyExistsTest());
 
         var endDate = LocalDateTime.of(2024, 10, 1, 0, 0, 0)
                 .atZone(ZoneId.of("UTC")).toLocalDateTime();
@@ -72,7 +73,7 @@ public class CreateSubjectUseCaseTest {
 
     @Test
     void shouldNotCreateSubjectBecauseDescriptionIsRequired() {
-        setup(new CreateSubjectDataProviderTest(), new CreateSessionDataProviderSessionAlreadyExistsTest());
+        setup(new CreateSubjectDataProcessTest(), new CreateSessionDataProviderSessionAlreadyExistsTest());
 
         var exception = assertThrows(SubjectException.class, () -> {
             var subject = new Subject(
@@ -88,7 +89,7 @@ public class CreateSubjectUseCaseTest {
 
     @Test
     void shouldNotCreateSubjectBecauseDescriptionAlreadyExists() {
-        setup(new CreateSubjectDataProviderDescriptionAlreadyExistsTest(), new CreateSessionDataProviderSessionAlreadyExistsTest());
+        setup(new CreateSubjectDataProcessDescriptionAlreadyExistsTest(), new CreateSessionDataProviderSessionAlreadyExistsTest());
 
         var exception = assertThrows(SubjectException.class, () -> {
             var subject = new Subject(
@@ -104,7 +105,7 @@ public class CreateSubjectUseCaseTest {
 
     @Test
     void shouldNotCreateSubjectBecauseSessionIsRequired() {
-        setup(new CreateSubjectDataProviderTest(), new CreateSessionDataProviderSessionAlreadyExistsTest());
+        setup(new CreateSubjectDataProcessTest(), new CreateSessionDataProviderSessionAlreadyExistsTest());
 
         var exception = assertThrows(SubjectException.class, () -> {
             var subject = new Subject(
@@ -120,7 +121,7 @@ public class CreateSubjectUseCaseTest {
 
     @Test
     void shouldNotCreateSubjectBecauseSessionNotFound() {
-        setup(new CreateSubjectDataProviderTest(), new CloseSessionNotFoundDataProviderTest());
+        setup(new CreateSubjectDataProcessTest(), new CloseSessionNotFoundDataProcessTest());
 
         var exception = assertThrows(SubjectException.class, () -> {
             var subject = new Subject(
@@ -134,11 +135,27 @@ public class CreateSubjectUseCaseTest {
         assertEquals("Session not found", exception.getMessage());
     }
 
+    @Test
+    void shouldNotCreateSubjectBecauseSessionIsClosed() {
+        setup(new CreateSubjectDataProcessTest(), new SessionClosedDataProcessTest());
+
+        var exception = assertThrows(SubjectException.class, () -> {
+            var subject = new Subject(
+                    null,
+                    "test",
+                    "0191f0fa-ffc5-7267-8704-db0702624c5b"
+            );
+            useCase.execute(subject);
+        });
+
+        assertEquals("Session is closed", exception.getMessage());
+    }
+
 
     private void setup(
-            SubjectDataProvider subjectDataProvider,
-            SessionDataProvider sessionDataProvider) {
-        useCase = new CreateSubjectUseCase(subjectDataProvider, sessionDataProvider);
+            SubjectDataProcess subjectDataProcess,
+            SessionDataProcess sessionDataProcess) {
+        useCase = new CreateSubjectUseCase(subjectDataProcess, sessionDataProcess);
     }
 
 }

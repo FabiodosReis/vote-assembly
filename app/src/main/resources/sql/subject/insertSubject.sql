@@ -1,7 +1,7 @@
 INSERT INTO subject (
     id,
     description,
-    startDate,
+    start_Date,
     end_date,
     session_id
 ) VALUES(

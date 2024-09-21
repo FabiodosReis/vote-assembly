@@ -5,6 +5,10 @@ server:
     mime-types:
       - application/json
 
+springdoc:
+  show-actuator: true
+  packagesToScan: com.backoffice.app.application.api
+
 spring:
   application:
     name: vote-assembly
@@ -17,15 +21,15 @@ spring:
     change-log: classpath:/db/changelog.xml
 sql:
   base-path:
-    associate: 'associate'
-    session: 'session'
-    subject: 'subject'
-    vote: 'vote'
+    associate: 'associate/'
+    session: 'session/'
+    subject: 'subject/'
+    vote: 'vote/'
 aws:
   s3:
     session: "vote-assembly"
-  access-key:
-  secret-key:
+  access-key: ''
+  secret-key: ''
   sns:
     topic:
       session-vote: "arn:aws:sns:us-east-1:381492217956:topic_backoffice_session_vote"

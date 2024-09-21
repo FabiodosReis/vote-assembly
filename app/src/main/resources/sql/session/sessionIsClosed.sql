@@ -1,0 +1,1 @@
+SELECT EXISTS(SELECT 1 FROM `session` WHERE id = :id AND end_date IS NOT NULL)

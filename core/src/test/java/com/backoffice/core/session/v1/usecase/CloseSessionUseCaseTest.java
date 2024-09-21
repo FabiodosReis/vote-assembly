@@ -1,11 +1,11 @@
 package com.backoffice.core.session.v1.usecase;
 
-import com.backoffice.core.session.adapter.SessionDataProvider;
-import com.backoffice.core.session.exception.SessionException;
-import com.backoffice.core.session.v1.usecase.dataprovider.CloseSessionDataProviderTest;
-import com.backoffice.core.session.v1.usecase.dataprovider.CloseSessionNotFoundDataProviderTest;
-import com.backoffice.core.subject.adapter.SubjectDataProvider;
-import com.backoffice.core.subject.v1.usecase.dataprovider.FindAllSubjectBySessionDataProviderTest;
+import com.backoffice.core.session.v1.adapter.SessionDataProcess;
+import com.backoffice.core.session.v1.exception.SessionException;
+import com.backoffice.core.session.v1.usecase.dataprovider.CloseSessionDataProcessTest;
+import com.backoffice.core.session.v1.usecase.dataprovider.CloseSessionNotFoundDataProcessTest;
+import com.backoffice.core.subject.v1.adapter.SubjectDataProcess;
+import com.backoffice.core.subject.v1.usecase.dataprovider.FindAllSubjectBySessionDataProcessTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +17,7 @@ public class CloseSessionUseCaseTest {
 
     @Test
     void shouldCloseSession() {
-        setupMock(new CloseSessionDataProviderTest(), new FindAllSubjectBySessionDataProviderTest());
+        setupMock(new CloseSessionDataProcessTest(), new FindAllSubjectBySessionDataProcessTest());
 
         var session = useCase.execute("0191f0fa-ffc5-7267-8704-db0702624c5b");
 
@@ -27,7 +27,7 @@ public class CloseSessionUseCaseTest {
 
     @Test
     void shouldNotCloseSessionBecauseSessionNotFound() {
-        setupMock(new CloseSessionNotFoundDataProviderTest(), new FindAllSubjectBySessionDataProviderTest());
+        setupMock(new CloseSessionNotFoundDataProcessTest(), new FindAllSubjectBySessionDataProcessTest());
 
         var exception = assertThrows(SessionException.class, () -> {
             useCase.execute("0191f0fa-ffc5-7267-8704-db0702624c5b");
@@ -37,7 +37,7 @@ public class CloseSessionUseCaseTest {
     }
 
 
-    private void setupMock(SessionDataProvider dataProvider, SubjectDataProvider subjectDataProvider) {
-        useCase = new CloseSessionUseCase(dataProvider, subjectDataProvider);
+    private void setupMock(SessionDataProcess dataProvider, SubjectDataProcess subjectDataProcess) {
+        useCase = new CloseSessionUseCase(dataProvider, subjectDataProcess);
     }
 }

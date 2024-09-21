@@ -1,10 +1,10 @@
 package com.backoffice.core.associate.v1.usecase;
 
 
-import com.backoffice.core.associate.enums.StatusAssociateEnum;
-import com.backoffice.core.associate.exception.AssociateException;
-import com.backoffice.core.associate.model.Associate;
-import com.backoffice.core.associate.v1.usecase.dataProvider.CreateAssociateDataProviderTest;
+import com.backoffice.core.associate.v1.enums.StatusAssociateEnum;
+import com.backoffice.core.associate.v1.exception.AssociateException;
+import com.backoffice.core.associate.v1.model.Associate;
+import com.backoffice.core.associate.v1.usecase.dataProvider.CreateAssociateDataProcessTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ public class CreateAssociateUseCaseTest {
 
     @BeforeEach
     public void setup() {
-        var dataProvider = new CreateAssociateDataProviderTest();
+        var dataProvider = new CreateAssociateDataProcessTest();
         createAssociateUseCase = new CreateAssociateUseCase(dataProvider);
     }
 

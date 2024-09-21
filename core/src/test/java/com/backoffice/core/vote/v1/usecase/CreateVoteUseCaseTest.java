@@ -1,24 +1,24 @@
 package com.backoffice.core.vote.v1.usecase;
 
-import com.backoffice.core.associate.adapter.AssociateDataProvider;
+import com.backoffice.core.associate.v1.adapter.AssociateDataProcess;
 import com.backoffice.core.associate.v1.usecase.dataProvider.CreateAssociateDataProviderAssociateNotAbleToVoteTest;
-import com.backoffice.core.associate.v1.usecase.dataProvider.CreateAssociateDataProviderTest;
-import com.backoffice.core.associate.v1.usecase.dataProvider.NotFoundAssociateDataProviderTest;
-import com.backoffice.core.subject.adapter.SubjectDataProvider;
-import com.backoffice.core.subject.v1.usecase.dataprovider.CreateSubjectDataProviderTest;
-import com.backoffice.core.subject.v1.usecase.dataprovider.FindByIdSubjectDataProviderTest;
-import com.backoffice.core.vote.adapter.VoteDataProvider;
-import com.backoffice.core.vote.exception.VoteException;
-import com.backoffice.core.vote.model.Vote;
-import com.backoffice.core.vote.v1.usecase.dataprovider.CreateVoteDataProviderAssociateAlreadyVotedTest;
-import com.backoffice.core.vote.v1.usecase.dataprovider.CreateVoteDataProviderTest;
+import com.backoffice.core.associate.v1.usecase.dataProvider.CreateAssociateDataProcessTest;
+import com.backoffice.core.associate.v1.usecase.dataProvider.NotFoundAssociateDataProcessTest;
+import com.backoffice.core.subject.v1.adapter.SubjectDataProcess;
+import com.backoffice.core.subject.v1.usecase.dataprovider.CreateSubjectDataProcessTest;
+import com.backoffice.core.subject.v1.usecase.dataprovider.FindByIdSubjectDataProcessTest;
+import com.backoffice.core.vote.v1.adapter.VoteDataProcess;
+import com.backoffice.core.vote.v1.exception.VoteException;
+import com.backoffice.core.vote.v1.model.Vote;
+import com.backoffice.core.vote.v1.usecase.dataprovider.CreateVoteDataProcessAssociateAlreadyVotedTest;
+import com.backoffice.core.vote.v1.usecase.dataprovider.CreateVoteDataProcessTest;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
-import static com.backoffice.core.vote.enums.VoteStatusEnum.NO;
-import static com.backoffice.core.vote.enums.VoteStatusEnum.YES;
+import static com.backoffice.core.vote.v1.enums.VoteStatusEnum.NO;
+import static com.backoffice.core.vote.v1.enums.VoteStatusEnum.YES;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateVoteUseCaseTest {
@@ -28,9 +28,9 @@ public class CreateVoteUseCaseTest {
     @Test
     void shouldCreateVoteYes() {
         setup(
-                new CreateVoteDataProviderTest(),
-                new CreateAssociateDataProviderTest(),
-                new FindByIdSubjectDataProviderTest()
+                new CreateVoteDataProcessTest(),
+                new CreateAssociateDataProcessTest(),
+                new FindByIdSubjectDataProcessTest()
         );
 
         var vote = new Vote(
@@ -56,9 +56,9 @@ public class CreateVoteUseCaseTest {
     @Test
     void shouldCreateVoteNo() {
         setup(
-                new CreateVoteDataProviderTest(),
-                new CreateAssociateDataProviderTest(),
-                new FindByIdSubjectDataProviderTest()
+                new CreateVoteDataProcessTest(),
+                new CreateAssociateDataProcessTest(),
+                new FindByIdSubjectDataProcessTest()
         );
 
         var vote = new Vote(
@@ -84,9 +84,9 @@ public class CreateVoteUseCaseTest {
     @Test
     void shouldNotCreateVoteBecauseAssociateNotFound() {
         setup(
-                new CreateVoteDataProviderTest(),
-                new NotFoundAssociateDataProviderTest(),
-                new FindByIdSubjectDataProviderTest()
+                new CreateVoteDataProcessTest(),
+                new NotFoundAssociateDataProcessTest(),
+                new FindByIdSubjectDataProcessTest()
         );
 
         var exception = assertThrows(VoteException.class, () -> {
@@ -106,9 +106,9 @@ public class CreateVoteUseCaseTest {
     @Test
     void shouldNotCreateVoteBecauseAssociateUnableToVote() {
         setup(
-                new CreateVoteDataProviderTest(),
+                new CreateVoteDataProcessTest(),
                 new CreateAssociateDataProviderAssociateNotAbleToVoteTest(),
-                new FindByIdSubjectDataProviderTest()
+                new FindByIdSubjectDataProcessTest()
         );
 
         var exception = assertThrows(VoteException.class, () -> {
@@ -128,9 +128,9 @@ public class CreateVoteUseCaseTest {
     @Test
     void shouldNotCreateVoteBecauseAssociateAlreadyVoted() {
         setup(
-                new CreateVoteDataProviderAssociateAlreadyVotedTest(),
-                new CreateAssociateDataProviderTest(),
-                new FindByIdSubjectDataProviderTest()
+                new CreateVoteDataProcessAssociateAlreadyVotedTest(),
+                new CreateAssociateDataProcessTest(),
+                new FindByIdSubjectDataProcessTest()
         );
 
         var exception = assertThrows(VoteException.class, () -> {
@@ -150,9 +150,9 @@ public class CreateVoteUseCaseTest {
     @Test
     void shouldNotCreateVoteBecauseAssociateSubjectNotFound() {
         setup(
-                new CreateVoteDataProviderTest(),
-                new CreateAssociateDataProviderTest(),
-                new CreateSubjectDataProviderTest()
+                new CreateVoteDataProcessTest(),
+                new CreateAssociateDataProcessTest(),
+                new CreateSubjectDataProcessTest()
         );
 
         var exception = assertThrows(VoteException.class, () -> {
@@ -170,10 +170,10 @@ public class CreateVoteUseCaseTest {
     }
 
     private void setup(
-            VoteDataProvider dataProvider,
-            AssociateDataProvider associateDataProvider,
-            SubjectDataProvider subjectDataProvider
+            VoteDataProcess dataProvider,
+            AssociateDataProcess associateDataProcess,
+            SubjectDataProcess subjectDataProcess
     ) {
-        useCase = new CreateVoteUseCase(dataProvider, associateDataProvider, subjectDataProvider);
+        useCase = new CreateVoteUseCase(dataProvider, associateDataProcess, subjectDataProcess);
     }
 }

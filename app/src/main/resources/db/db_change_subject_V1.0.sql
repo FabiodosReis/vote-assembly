@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS subject (
     start_date DATETIME NOT NULL DEFAULT NOW(),
     end_date DATETIME NOT NULL,
     session_id CHAR(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-    enable BOOLEAN DEFAULT true,
     PRIMARY KEY(id),
     FOREIGN KEY(session_id) REFERENCES `session`(id)
 );

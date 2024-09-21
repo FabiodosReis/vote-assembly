@@ -1,9 +1,9 @@
 package com.backoffice.core.session.v1.usecase;
 
-import com.backoffice.core.session.adapter.SessionDataProvider;
-import com.backoffice.core.session.exception.SessionException;
-import com.backoffice.core.session.model.Session;
-import com.backoffice.core.subject.adapter.SubjectDataProvider;
+import com.backoffice.core.session.v1.adapter.SessionDataProcess;
+import com.backoffice.core.session.v1.exception.SessionException;
+import com.backoffice.core.session.v1.model.Session;
+import com.backoffice.core.subject.v1.adapter.SubjectDataProcess;
 import lombok.RequiredArgsConstructor;
 
 import javax.inject.Named;
@@ -14,22 +14,22 @@ import java.time.ZoneId;
 @RequiredArgsConstructor
 public class CloseSessionUseCase {
 
-    private final SessionDataProvider sessionDataProvider;
-    private final SubjectDataProvider subjectDataProvider;
+    private final SessionDataProcess sessionDataProcess;
+    private final SubjectDataProcess subjectDataProcess;
 
     public Session execute(String sessionId) throws SessionException {
 
-        var optionalSession = sessionDataProvider.findById(sessionId)
+        var optionalSession = sessionDataProcess.findById(sessionId)
                 .orElseThrow(() -> new SessionException(String.format("Session %s not found", sessionId)));
 
         optionalSession.setEndDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-        var subjectList = subjectDataProvider.findAllBySessionId(sessionId);
+        var subjectList = subjectDataProcess.findAllBySessionId(sessionId);
 
         subjectList
-                .forEach(subject -> subjectDataProvider.close(subject.getId(), LocalDateTime.now(ZoneId.of("UTC"))));
+                .forEach(subject -> subjectDataProcess.close(subject.getId(), LocalDateTime.now(ZoneId.of("UTC"))));
 
-        return sessionDataProvider.closeSession(optionalSession)
+        return sessionDataProcess.closeSession(optionalSession)
                 .orElseGet(null);
     }
 }

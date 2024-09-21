@@ -1,1 +1,1 @@
-SELECT EXISTS(SELECT 1 FROM vote WHERE associate_id = :associateId AND subjectId = :subjectId)
+SELECT EXISTS(SELECT 1 FROM vote WHERE associate_id = :associateId AND subject_id = :subjectId)

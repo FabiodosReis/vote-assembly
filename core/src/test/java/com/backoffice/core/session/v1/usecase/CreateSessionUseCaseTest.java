@@ -1,10 +1,10 @@
 package com.backoffice.core.session.v1.usecase;
 
-import com.backoffice.core.session.adapter.SessionDataProvider;
-import com.backoffice.core.session.exception.SessionException;
-import com.backoffice.core.session.model.Session;
+import com.backoffice.core.session.v1.adapter.SessionDataProcess;
+import com.backoffice.core.session.v1.exception.SessionException;
+import com.backoffice.core.session.v1.model.Session;
 import com.backoffice.core.session.v1.usecase.dataprovider.CreateSessionDataProviderSessionAlreadyExistsTest;
-import com.backoffice.core.session.v1.usecase.dataprovider.CreateSessionDataProviderTest;
+import com.backoffice.core.session.v1.usecase.dataprovider.CreateSessionDataProcessTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +15,7 @@ public class CreateSessionUseCaseTest {
 
     @Test
     void shouldCreateSession() {
-        setupMock(new CreateSessionDataProviderTest());
+        setupMock(new CreateSessionDataProcessTest());
 
         var session = new Session(
                 null,
@@ -31,7 +31,7 @@ public class CreateSessionUseCaseTest {
 
     @Test
     void shouldNotCreateSessionBecauseDescriptionIsRequired() {
-        setupMock(new CreateSessionDataProviderTest());
+        setupMock(new CreateSessionDataProcessTest());
 
         var exception = assertThrows(SessionException.class, () -> {
             var session = new Session(
@@ -60,7 +60,7 @@ public class CreateSessionUseCaseTest {
     }
 
 
-    private void setupMock(SessionDataProvider dataProvider) {
+    private void setupMock(SessionDataProcess dataProvider) {
         useCase = new CreateSessionUseCase(dataProvider);
     }
 }

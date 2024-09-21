@@ -1,11 +1,12 @@
 package com.backoffice.core.session.v1.usecase;
 
-import com.backoffice.core.session.model.Session;
-import com.backoffice.core.session.adapter.SessionDataProvider;
-import com.backoffice.core.session.exception.SessionException;
+import com.backoffice.core.session.v1.model.Session;
+import com.backoffice.core.session.v1.adapter.SessionDataProcess;
+import com.backoffice.core.session.v1.exception.SessionException;
 import lombok.RequiredArgsConstructor;
 
 import javax.inject.Named;
+
 import java.util.UUID;
 
 import static java.util.Objects.isNull;
@@ -14,7 +15,7 @@ import static java.util.Objects.isNull;
 @RequiredArgsConstructor
 public class CreateSessionUseCase {
 
-    private final SessionDataProvider dataProvider;
+    private final SessionDataProcess dataProvider;
 
     public Session execute(Session session) throws SessionException {
         session.setId(UUID.randomUUID().toString());
