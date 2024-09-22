@@ -6,11 +6,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
     http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    <include file="db/db_change_associate_V1.0.sql"></include>
-    <include file="db/db_change_session_V1.0.sql"></include>
-    <include file="db/db_change_subject_V1.0.sql"></include>
-    <include file="db/db_change_vote_V1.0.sql"></include>
-
-
+    <include file="src/main/resources/db/db_change_associate_V1.0.sql"></include>
+    <include file="src/main/resources/db/db_change_session_V1.0.sql"></include>
+    <include file="src/main/resources/db/db_change_subject_V1.0.sql"></include>
+    <include file="src/main/resources/db/db_change_vote_V1.0.sql"></include>
 
 </databaseChangeLog>

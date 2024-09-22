@@ -23,26 +23,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jacoco.version>0.8.12</jacoco.version>
         <junit.jupiter.version>5.11.0</junit.jupiter.version>
-        <spring.profiles.active>${profile.active}</spring.profiles.active>
+        <liquibase-maven-plugin.version>4.29.2</liquibase-maven-plugin.version>
     </properties>
-
-    <profiles>
-        <profile>
-            <id>staging</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <profile.active>staging</profile.active>
-            </properties>
-        </profile>
-        <profile>
-            <id>production</id>
-            <properties>
-                <profile.active>production</profile.active>
-            </properties>
-        </profile>
-    </profiles>
 
     <modules>
         <module>core</module>
@@ -85,9 +67,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
                         <configuration>
                             <mainClass>com.backoffice.app.AppApplication</mainClass>
                             <finalName>api-vote-assembly-${project.version}</finalName>
@@ -99,11 +78,30 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <excludes>
+                        <exclude>app/**/*Test.java</exclude>
+                    </excludes>
                     <includes>
-                        <include>**/*Test.java</include>
+                        <include>core/**/*Test.java</include>
                     </includes>
-                    <argLine>-Dspring.profiles.active=${spring.profiles.active}</argLine>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>app/**/*IT.java</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -115,6 +113,16 @@
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-initialize-integration-test</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                            <propertyName>integrationTestCoverageAgent</propertyName>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

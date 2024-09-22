@@ -9,6 +9,7 @@ import com.backoffice.core.subject.v1.exception.SubjectException;
 import com.backoffice.core.subject.v1.model.Subject;
 import com.backoffice.core.subject.v1.usecase.dataprovider.CreateSubjectDataProcessDescriptionAlreadyExistsTest;
 import com.backoffice.core.subject.v1.usecase.dataprovider.CreateSubjectDataProcessTest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

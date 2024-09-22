@@ -7,6 +7,7 @@ import com.backoffice.core.associate.v1.usecase.dataProvider.NotFoundAssociateDa
 import com.backoffice.core.subject.v1.adapter.SubjectDataProcess;
 import com.backoffice.core.subject.v1.usecase.dataprovider.CreateSubjectDataProcessTest;
 import com.backoffice.core.subject.v1.usecase.dataprovider.FindByIdSubjectDataProcessTest;
+import com.backoffice.core.subject.v1.usecase.dataprovider.FindByIdSubjectEndDateBeforeDataProcessTest;
 import com.backoffice.core.vote.v1.adapter.VoteDataProcess;
 import com.backoffice.core.vote.v1.exception.VoteException;
 import com.backoffice.core.vote.v1.model.Vote;
@@ -167,6 +168,28 @@ public class CreateVoteUseCaseTest {
         });
 
         assertEquals("Subject 0191f168-8ec6-74a4-ad9e-102616607e24 not found", exception.getMessage());
+    }
+
+    @Test
+    void shouldNotCreateVoteBecauseSubjectClosed() {
+        setup(
+                new CreateVoteDataProcessTest(),
+                new CreateAssociateDataProcessTest(),
+                new FindByIdSubjectEndDateBeforeDataProcessTest()
+        );
+
+        var exception = assertThrows(VoteException.class, () -> {
+            var vote = new Vote(
+                    null,
+                    "0191f12e-1848-70f7-b32f-38a029602a4a",
+                    "0191f168-8ec6-74a4-ad9e-102616607e24",
+                    YES
+            );
+
+            useCase.execute(vote);
+        });
+
+        assertEquals("Subject 0191f168-8ec6-74a4-ad9e-102616607e24 closed", exception.getMessage());
     }
 
     private void setup(
