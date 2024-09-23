@@ -2,6 +2,9 @@ spring:
   config:
     activate:
       on-profile: local
+  liquibase:
+    change-log: classpath:/db/changelog.xml
+    enabled: false
 
 vote-assembly:
   datasource:

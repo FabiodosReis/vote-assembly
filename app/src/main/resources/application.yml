@@ -12,9 +12,6 @@ springdoc:
 spring:
   application:
     name: api-vote-assembly
-  liquibase:
-    change-log: classpath:/db/changelog.xml
-    enabled: false
   jpa:
     open-in-view: false
     hibernate:
