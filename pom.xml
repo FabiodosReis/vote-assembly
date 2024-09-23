@@ -67,6 +67,9 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <executions>
                     <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
                         <configuration>
                             <mainClass>com.backoffice.app.AppApplication</mainClass>
                             <finalName>api-vote-assembly-${project.version}</finalName>
