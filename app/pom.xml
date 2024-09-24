@@ -14,7 +14,6 @@
 	<name>app</name>
 
 	<properties>
-		<liquibase-maven-plugin.version>4.29.2</liquibase-maven-plugin.version>
 		<mysql.version>8.0.28</mysql.version>
 		<mockito.version>5.12.0</mockito.version>
 		<actuator.version>3.3.3</actuator.version>
@@ -132,11 +131,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-maven-plugin</artifactId>
-			<version>${liquibase-maven-plugin.version}</version>
-		</dependency>
 
 		<!-- utils -->
 		<dependency>
@@ -192,7 +186,6 @@
 				<version>0.8.12</version>
 				<executions>
 					<execution>
-						<!--  mvn failsafe:integration-test -->
 						<id>report</id>
 						<phase>test</phase>
 						<goals>
@@ -230,7 +223,7 @@
 			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>${liquibase-maven-plugin.version}</version>
+				<version>4.29.2</version>
 				<configuration>
 					<driver>com.mysql.cj.jdbc.Driver</driver>
 					<username>root</username>

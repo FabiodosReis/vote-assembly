@@ -10,13 +10,12 @@ import javax.sql.DataSource;
 
 @TestConfiguration
 public class LiquibaseTestConfig {
+
     @Bean
-    public SpringLiquibase liquibase(@Qualifier("datasource-test") DataSource dataSource){
+    public SpringLiquibase liquibase(@Qualifier("datasource-test") DataSource dataSource) {
         var liquibase = new SpringLiquibase();
-        liquibase.setDropFirst(true);
         liquibase.setDataSource(dataSource);
         liquibase.setDefaultSchema("test");
-        liquibase.setContexts("test");
         liquibase.setChangeLog("classpath:/db/changelog.xml");
         return liquibase;
     }
