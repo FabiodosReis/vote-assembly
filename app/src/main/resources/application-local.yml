@@ -1,7 +1,7 @@
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: local, staging
 
 vote-assembly:
   datasource:
@@ -12,4 +12,4 @@ vote-assembly:
     minimumPoolSize: 3
     connectionTestQuery: SELECT 1
     poolName: staging-vote-assembly-pool
-    driverClassName: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver

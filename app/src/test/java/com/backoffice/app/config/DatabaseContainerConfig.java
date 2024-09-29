@@ -1,6 +1,6 @@
 package com.backoffice.app.config;
 
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.util.TestPropertyValues;
@@ -12,7 +12,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @TestConfiguration
 @Testcontainers
-@Log4j2
+@Slf4j
 public class DatabaseContainerConfig implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
     @Container
@@ -31,11 +31,14 @@ public class DatabaseContainerConfig implements ApplicationContextInitializer<Co
                     .of(
                             "spring.datasource.jdbcUrl=".concat(mysql.getJdbcUrl().concat("?useSSL=false")),
                             "spring.datasource.username=".concat(mysql.getUsername()),
-                            "spring.datasource.password=".concat(mysql.getPassword())
+                            "spring.datasource.password=".concat(mysql.getPassword()),
+                            "vote-assembly.datasource.jdbcUrl=".concat(mysql.getJdbcUrl().concat("?useSSL=false")),
+                            "vote-assembly.datasource.username=".concat(mysql.getUsername()),
+                            "vote-assembly.datasource.password=".concat(mysql.getPassword())
                     )
                     .applyTo(applicationContext);
 
-            log.info("[DatabaseContainerConfig] Test container is created");
+            log.info("[DatabaseContainerConfig] Test container created");
         }
     }
 }

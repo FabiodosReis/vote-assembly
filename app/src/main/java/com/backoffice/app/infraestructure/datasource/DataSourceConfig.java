@@ -55,7 +55,6 @@ public class DataSourceConfig {
         properties.setProperty("hibernate.hbm2ddl", "none");
         factoryBean.setJpaProperties(properties);
         factoryBean.setPackagesToScan("com.backoffice.app");
-
         return factoryBean;
     }
 

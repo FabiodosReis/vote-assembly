@@ -21,8 +21,7 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "com.backoffice.*")
 public class DataSourceTestConfig {
 
-    @Bean("datasource-test")
-    @Primary
+    @Bean("dataSource-test")
     public DataSource dataSource() {
         return DataSourceBuilder.create()
                 .type(HikariDataSource.class)
@@ -50,7 +49,7 @@ public class DataSourceTestConfig {
         return factoryBean;
     }
 
-    @Bean("entityManagerFactory")
+    @Bean("transactionManager")
     public PlatformTransactionManager transactionManager(EntityManagerFactory factory) {
         return new JpaTransactionManager(factory);
     }

@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 public class LiquibaseTestConfig {
 
     @Bean
-    public SpringLiquibase liquibase(@Qualifier("datasource-test") DataSource dataSource) {
+    public SpringLiquibase liquibase(@Qualifier("dataSource-test") DataSource dataSource) {
         var liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSource);
         liquibase.setDefaultSchema("test");

@@ -12,4 +12,4 @@ vote-assembly:
     minimumPoolSize: 3
     connectionTestQuery: SELECT 1
     poolName: vote-assembly-pool
-    driverClassName: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
