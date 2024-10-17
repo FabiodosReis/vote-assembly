@@ -1,5 +1,6 @@
 #Objetivo
 
+
 Na cooperativa, cada associado possui um voto e as decicoes
 sao tomadas em assembleias, por votacao.
 
