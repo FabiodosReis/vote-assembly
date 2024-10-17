@@ -9,7 +9,6 @@ sessooes de votacao.
 A solucao deve ser executada na nunvem e prover as seguintes
 funcionalidades:
 
-
 * Cadastrar uma nova pauta.
 * Abrir uma sessao de votacao em uma pauta, onde a sessao
   de votacao deve ficar aberta por um tempo determinado ou 1

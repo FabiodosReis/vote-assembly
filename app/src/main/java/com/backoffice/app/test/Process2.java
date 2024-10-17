@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 public class Process2 implements Service{
     @Override
     public void process(Vote vote) {
-        System.out.println("Invoke Process1");
+        System.out.println("Invoke Process2");
     }
 }
