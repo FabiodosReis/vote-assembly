@@ -1,12 +1,10 @@
 package com.backoffice.app;
 
 import com.backoffice.app.annotation.TestRepositoryCommonAnnotation;
-import com.backoffice.app.application.client.AwsSnsClient;
 import com.backoffice.app.port.associate.AssociateRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,9 +14,6 @@ class AppApplicationIT {
 
     @Autowired
     private AssociateRepository repository;
-
-    @MockBean
-    private AwsSnsClient awsSnsClient;
 
     @Test
     void contextLoads() {

@@ -5,3 +5,5 @@ spring:
 
   main:
     allow-bean-definition-overriding: true
+  aws:
+    region: "us-east-1"

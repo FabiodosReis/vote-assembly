@@ -18,8 +18,8 @@
 		<mockito.version>5.12.0</mockito.version>
 		<actuator.version>3.3.3</actuator.version>
 		<jackson.datatype.version>2.17.2</jackson.datatype.version>
-		<spring.cloud.version>2023.0.1</spring.cloud.version>
-		<spring.cloud.aws.version>3.1.1</spring.cloud.aws.version>
+		<spring.cloud.version>2023.0.3</spring.cloud.version>
+		<spring.cloud.aws.version>3.2.0</spring.cloud.aws.version>
 		<aws.java.sdk.version>2.28.1</aws.java.sdk.version>
 		<springdoc.version>2.6.0</springdoc.version>
 		<opencsv.version>5.9</opencsv.version>
@@ -67,10 +67,6 @@
 		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>sns</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>software.amazon.awssdk</groupId>
-			<artifactId>sts</artifactId>
 		</dependency>
 
 		<!-- core -->
@@ -146,6 +142,7 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
+			<version>4.5.0-M2</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>

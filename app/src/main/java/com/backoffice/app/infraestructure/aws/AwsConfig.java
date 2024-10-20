@@ -1,10 +1,12 @@
 package com.backoffice.app.infraestructure.aws;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
@@ -13,35 +15,29 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.sns.SnsClient;
 import software.amazon.awssdk.services.sns.model.Topic;
 
-import static org.apache.commons.lang3.ObjectUtils.isEmpty;
+import java.util.Arrays;
+
 
 @Configuration
 public class AwsConfig {
 
-    public AwsConfig(
-            @Value("${aws.access-key}") String awsAccessKey,
-            @Value("${aws.secret-key}") String awsSecretKey,
-            @Value("${aws.sns.topic.session-vote}") String topicSessionVote) {
-        this.awsAccessKey = awsAccessKey;
-        this.awsSecretKey = awsSecretKey;
-        this.topicSessionVote = topicSessionVote;
-    }
+    @Value("${aws.sns.topic.session-vote}")
+    private String topicSessionVote;
 
-
-    private final String awsAccessKey;
-    private final String awsSecretKey;
-    private final String topicSessionVote;
+    @Autowired
+    private Environment environment;
 
 
     @Bean @Primary
     public AwsCredentialsProvider awsCredentialsProvider() {
-        if (isEmpty(awsAccessKey) || isEmpty(awsSecretKey)) {
+        if (Arrays.asList(environment.getActiveProfiles()).contains("production")) {
             return DefaultCredentialsProvider.create();
         }
         return () -> {
-            return AwsBasicCredentials.create(
-                    awsAccessKey,
-                    awsSecretKey
+            return AwsBasicCredentials
+                    .create(
+                    environment.getProperty("ACCESS_KEY"),
+                    environment.getProperty("SECRET_KEY")
             );
         };
     }
