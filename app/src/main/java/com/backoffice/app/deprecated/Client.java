@@ -1,12 +1,13 @@
-package com.backoffice.app.test;
+package com.backoffice.app.deprecated;
 
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.backoffice.app.test.EnumTest.MODEL_1;
-import static com.backoffice.app.test.EnumTest.MODEL_2;
+import static com.backoffice.app.deprecated.EnumTest.MODEL_1;
+import static com.backoffice.app.deprecated.EnumTest.MODEL_2;
 
+@Deprecated
 @Component
 public class Client {
 

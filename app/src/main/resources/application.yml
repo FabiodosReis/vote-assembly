@@ -24,10 +24,10 @@ spring:
 
 sql:
   base-path:
-    associate: 'associate/'
-    session: 'session/'
-    subject: 'subject/'
-    vote: 'vote/'
+    associate: 'associate'
+    session: 'session'
+    subject: 'subject'
+    vote: 'vote'
 aws:
   s3:
     session: "vote-assembly"

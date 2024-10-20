@@ -1,9 +1,10 @@
-package com.backoffice.app.test;
+package com.backoffice.app.deprecated;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+@Deprecated
 public enum EnumTest {
 
     MODEL_1 {

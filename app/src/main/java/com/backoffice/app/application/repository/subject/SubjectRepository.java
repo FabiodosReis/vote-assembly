@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.backoffice.app.application.constants.ApplicationConstants.FILE_SEPARATOR;
 import static com.backoffice.app.application.utils.FileUtils.getSql;
 
 @Repository
@@ -28,7 +29,7 @@ public class SubjectRepository implements SubjectDataProcess {
 
     @Override
     public Optional<Subject> save(Subject subject) {
-        var sql = getSql(basePath.concat("insertSubject.sql"));
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("insertSubject.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("id", subject.getId());
         param.put("description", subject.getDescription());
@@ -42,7 +43,7 @@ public class SubjectRepository implements SubjectDataProcess {
 
     @Override
     public boolean existsByDescription(Subject subject) {
-        var sql = getSql(basePath.concat("findSubjectByDescription.sql"));
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("findSubjectByDescription.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("description", subject.getDescription());
         param.put("id", subject.getId());
@@ -55,10 +56,10 @@ public class SubjectRepository implements SubjectDataProcess {
     public Optional<Subject> findById(String id) {
         try {
 
+            var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("findSubjectById.sql"));
             Map<String, Object> param = new HashMap<>();
             param.put("id", id);
 
-            var sql = getSql(basePath.concat("findSubjectById.sql"));
             var session = jdbcTemplate.queryForObject(sql, param, rowMapper);
             return session == null ? Optional.empty() : Optional.of(session);
 
@@ -69,7 +70,7 @@ public class SubjectRepository implements SubjectDataProcess {
 
     @Override
     public void disableSubject(String id, LocalDateTime endDate) {
-        var sql = getSql(basePath.concat("disableSubject.sql"));
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("disableSubject.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("id", id);
         param.put("endDate", endDate);
@@ -82,13 +83,13 @@ public class SubjectRepository implements SubjectDataProcess {
         Map<String, Object> param = new HashMap<>();
         param.put("sessionId", sessionId);
 
-        var sql = getSql(basePath.concat("findAllSubjectBySessionId.sql"));
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("findAllSubjectBySessionId.sql"));
         return jdbcTemplate.query(sql, param, rowMapper);
     }
 
     @Override
     public void close(String id, LocalDateTime endDate) {
-        var sql = getSql(basePath.concat("/closeSubject.sql"));
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("closeSubject.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("id", id);
         param.put("endDate", endDate);

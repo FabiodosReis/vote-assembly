@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.backoffice.app.application.constants.ApplicationConstants.FILE_SEPARATOR;
 import static com.backoffice.app.application.utils.FileUtils.getSql;
 import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
@@ -31,7 +32,7 @@ public class SessionRepository implements SessionDataProcess {
 
     @Override
     public Optional<Session> save(Session session) {
-        var sql = getSql(basePath.concat("insertSession.sql"));
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("insertSession.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("id", session.getId());
         param.put("description", session.getDescription());
@@ -43,7 +44,7 @@ public class SessionRepository implements SessionDataProcess {
 
     @Override
     public Optional<Session> closeSession(Session session) {
-        var sql = getSql(basePath.concat("closeSession.sql"));
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("closeSession.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("id", session.getId());
         param.put("endDate", session.getEndDate());
@@ -54,7 +55,7 @@ public class SessionRepository implements SessionDataProcess {
 
     @Override
     public boolean sessionIsClosed(String sessionId) {
-        var sql = getSql(basePath.concat("sessionIsClosed.sql"));
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("sessionIsClosed.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("id", sessionId);
 
@@ -69,7 +70,7 @@ public class SessionRepository implements SessionDataProcess {
             Map<String, Object> param = new HashMap<>();
             param.put("id", id);
 
-            var sql = getSql(basePath.concat("findSessionById.sql"));
+            var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("findSessionById.sql"));
             var session = jdbcTemplate.queryForObject(sql, param, rowMapper);
             return session == null ? Optional.empty() : Optional.of(session);
 
@@ -80,6 +81,7 @@ public class SessionRepository implements SessionDataProcess {
 
     @Override
     public List<SessionVO> findAll(SessionFilterVO vo) {
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("findAllSessions.sql"));
         var page = isEmpty(vo.getPage()) ? 0 : vo.getSize();
         var size = isEmpty(vo.getSize()) ? 10 : vo.getSize();
 
@@ -87,12 +89,12 @@ public class SessionRepository implements SessionDataProcess {
         param.put("page", page);
         param.put("size", size);
 
-        var sql = getSql(basePath.concat("findAllSessions.sql"));
         return jdbcTemplate.query(sql, param, rowMapperFindAll);
     }
 
     @Override
     public List<String[]> findAllCsv(SessionFilterVO vo) {
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("findAllSessionCSV.sql"));
         var page = isEmpty(vo.getPage()) ? 0 : vo.getSize();
         var size = isEmpty(vo.getSize()) ? 10 : vo.getSize();
 
@@ -100,13 +102,12 @@ public class SessionRepository implements SessionDataProcess {
         param.put("page", page);
         param.put("size", size);
 
-        var sql = getSql(basePath.concat("findAllSessionCSV.sql"));
         return jdbcTemplate.query(sql, param, rowMapperFile);
     }
 
     @Override
     public boolean existsByDescription(String description) {
-        var sql = getSql(basePath.concat("existsAssociateByDescription.sql"));
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("existsAssociateByDescription.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("description", description);
 

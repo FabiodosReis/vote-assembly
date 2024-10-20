@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.backoffice.app.application.constants.ApplicationConstants.FILE_SEPARATOR;
 import static com.backoffice.app.application.utils.FileUtils.getSql;
 
 @Repository
@@ -25,7 +26,7 @@ public class VoteRepository {
     private String basePath;
 
     public Optional<Vote> save(Vote vote) {
-        var sql = getSql(basePath.concat("insertVote.sql"));
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("insertVote.sql"));
 
         Map<String, Object> param = new HashMap<>();
         param.put("id", vote.getId());
@@ -44,7 +45,7 @@ public class VoteRepository {
             Map<String, Object> param = new HashMap<>();
             param.put("id", id);
 
-            var sql = getSql(basePath.concat("findVoteById.sql"));
+            var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("findVoteById.sql"));
             var session = jdbcTemplate.queryForObject(sql, param, rowMapper);
             return session == null ? Optional.empty() : Optional.of(session);
 
@@ -54,7 +55,7 @@ public class VoteRepository {
     }
 
     public boolean isAssociateAlreadyVoted(String associateId, String subjectId) {
-        var sql = getSql(basePath.concat("isAssociateAlreadyVoted.sql"));
+        var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("isAssociateAlreadyVoted.sql"));
         Map<String, Object> param = new HashMap<>();
         param.put("associateId", associateId);
         param.put("subjectId", subjectId);
