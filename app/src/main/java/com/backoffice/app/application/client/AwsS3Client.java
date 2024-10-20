@@ -1,6 +1,6 @@
 package com.backoffice.app.application.client;
 
-import com.backoffice.app.application.api.v1.vo.FileResponseVO;
+import com.backoffice.app.api.vo.FileResponseVO;
 import com.backoffice.app.application.exception.FileGenerateException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.backoffice.app.application.service.client.vo;
+package com.backoffice.app.application.client.vo;
 
 import lombok.Builder;
 import lombok.Getter;

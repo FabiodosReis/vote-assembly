@@ -1,7 +1,7 @@
 package com.backoffice.app.application.client;
 
+import com.backoffice.app.application.client.vo.SnsEventDto;
 import com.backoffice.app.application.exception.SnsException;
-import com.backoffice.app.application.service.client.vo.SnsEventDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

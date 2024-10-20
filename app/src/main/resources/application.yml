@@ -7,7 +7,7 @@ server:
 
 springdoc:
   show-actuator: true
-  packagesToScan: com.backoffice.app.application.api
+  packages-to-scan: com.backoffice.app.api.controller.v1, com.backoffice.app.api.handler
 
 spring:
   application:

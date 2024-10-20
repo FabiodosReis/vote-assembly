@@ -27,7 +27,7 @@ public class AwsConfig {
     @Autowired
     private Environment environment;
 
-
+    //when execute out production need pass user key and user secret to run project
     @Bean @Primary
     public AwsCredentialsProvider awsCredentialsProvider() {
         if (Arrays.asList(environment.getActiveProfiles()).contains("production")) {

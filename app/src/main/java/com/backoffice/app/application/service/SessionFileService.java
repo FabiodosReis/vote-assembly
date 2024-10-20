@@ -1,7 +1,7 @@
 package com.backoffice.app.application.service;
 
 import com.backoffice.app.application.client.AwsS3Client;
-import com.backoffice.app.application.api.v1.vo.FileResponseVO;
+import com.backoffice.app.api.vo.FileResponseVO;
 import com.backoffice.core.session.v1.usecase.FindAllSessionUseCase;
 import com.backoffice.core.session.v1.vo.SessionFilterVO;
 import lombok.RequiredArgsConstructor;

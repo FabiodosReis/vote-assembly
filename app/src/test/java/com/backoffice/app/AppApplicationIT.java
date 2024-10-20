@@ -1,7 +1,7 @@
 package com.backoffice.app;
 
 import com.backoffice.app.annotation.TestRepositoryCommonAnnotation;
-import com.backoffice.app.port.associate.AssociateRepository;
+import com.backoffice.app.application.repository.associate.AssociateRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
