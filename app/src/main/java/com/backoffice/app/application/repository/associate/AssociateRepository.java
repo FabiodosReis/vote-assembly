@@ -1,6 +1,5 @@
 package com.backoffice.app.application.repository.associate;
 
-import com.backoffice.app.application.utils.FileUtils;
 import com.backoffice.core.associate.v1.adapter.AssociateDataProcess;
 import com.backoffice.core.associate.v1.enums.StatusAssociateEnum;
 import com.backoffice.core.associate.v1.model.Associate;
@@ -12,7 +11,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,7 +63,7 @@ public class AssociateRepository implements AssociateDataProcess {
             Map<String, Object> param = new HashMap<>();
             param.put("id", id);
 
-            var sql =  new FileUtils().getSql2(basePath.concat(FILE_SEPARATOR).concat("findAssociateById.sql"));
+            var sql = getSql(basePath.concat(FILE_SEPARATOR).concat("findAssociateById.sql"));
             var associate = jdbcTemplate.queryForObject(sql, param, rowMapper);
             return associate == null ? Optional.empty() : Optional.of(associate);
 
