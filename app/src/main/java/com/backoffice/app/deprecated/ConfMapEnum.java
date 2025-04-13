@@ -10,7 +10,7 @@ import java.util.Map;
 @Deprecated
 @Configuration
 @RequiredArgsConstructor
-public class confMapEnum {
+public class ConfMapEnum {
 
     private final Process1 process1;
     private final Process2 process2;

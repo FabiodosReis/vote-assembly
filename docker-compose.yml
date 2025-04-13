@@ -21,3 +21,9 @@ services:
 
 volumes:
   mysqlDb:
+    driver: local
+    name: mysqlDb
+    driver_opts:
+      type: none
+      o: bind
+      device: ./mysqlDb

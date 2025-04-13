@@ -27,7 +27,7 @@ public enum EnumTest {
     @Component
     @RequiredArgsConstructor
     public static class ServiceProvider {
-        private final confMapEnum map;
+        private final ConfMapEnum map;
 
         @PostConstruct
         public void postConstructor() {
